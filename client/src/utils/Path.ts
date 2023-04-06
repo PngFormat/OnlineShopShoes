@@ -7,5 +7,6 @@ export enum UnauthorisedPath{
     LOGIN_ROUTE = '/login',
     REGISTRATION_ROUTE = '/registration',
     SHOP_ROUTE = '/',
-    DEVICE_ROUTE = '/device'
+    DEVICE_ROUTE = '/device',
+    MAINPAGE_ROUTE = '/main'
 }

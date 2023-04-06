@@ -5,6 +5,7 @@ import Basket from "./pages/Basket";
 import DevicePage from "./pages/DevicePage";
 import Shop from "./pages/Shop";
 import {AuthorisedPath, UnauthorisedPath} from "./utils/Path";
+import MainPage from "./pages/MainPage";
 
 export const authRoutes = [
  {
@@ -33,5 +34,9 @@ export const publicRoutes = [
     {
         path: UnauthorisedPath.REGISTRATION_ROUTE,
         Component: Authorization
+    },
+    {
+        path: UnauthorisedPath.MAINPAGE_ROUTE,
+        Component: MainPage
     }
 ]

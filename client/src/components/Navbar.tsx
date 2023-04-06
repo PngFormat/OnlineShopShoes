@@ -17,10 +17,16 @@ const NavBar = observer(() => {
     }
 
     return (
-     <Navbar style = {{maxHeight: 55}} bg="dark" variant="dark">
+     <Navbar style = {{maxHeight: 60}} bg="dark" variant="dark">
        <Container>
-           <img src="https://freepngimg.com/thumb/categories/627.png" alt="react logo" style={{ width: '100px',height:'100px' }}/>
-        <NavLink className = {styles.navLink} to = {UnauthorisedPath.SHOP_ROUTE}>ShoesStyler</NavLink>
+           <img src="https://freepngimg.com/thumb/categories/627.png" alt="react logo" style={{ width: '80px',height:'80px' }}/>
+        <NavLink className = {styles.navLink} to = {UnauthorisedPath.MAINPAGE_ROUTE} >ShoesStyler</NavLink>
+           <div className={styles.divBlock}>
+               <NavLink className = {styles.navLink} to = {UnauthorisedPath.MAINPAGE_ROUTE}>Чоловіче взуття</NavLink>
+               <NavLink className = {styles.navLink} to = {UnauthorisedPath.MAINPAGE_ROUTE}>Жіноче взуття</NavLink>
+               <NavLink className = {styles.navLink} to = {UnauthorisedPath.MAINPAGE_ROUTE}>Дитяче взуття</NavLink>
+           </div>
+
         {userStore.isAuth
         ?<Nav className="ms-auto">
           <Button onClick={() => history.push(AuthorisedPath.ADMIN_ROUTE)} variant = {'outline-light'}>Аdmin Panel</Button>
