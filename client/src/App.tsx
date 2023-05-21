@@ -1,16 +1,34 @@
 // @ts-nocheck
 import React, {useContext, useEffect, useState} from 'react';
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, useHistory} from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import NavBar from "./components/Navbar";
 import {observer} from "mobx-react-lite";
 import {Context} from "./index";
 import {check} from "./http/userApi";
-import {Spinner} from "react-bootstrap";
+import {Row, Spinner} from "react-bootstrap";
+import Basket from "./pages/Basket";
+import {IDevice} from "./types/deviceTypes";
+import DeviceItem from "./components/DeviceItem";
+import DeviceList from "./components/DeviceList";
+import {useCart} from "./Context/cartContext";
+import FavoritePage from "./pages/FavoritePage";
+import PeopleList from "./components/FetchSuppliers";
+
 
 const App = observer(() => {
+
+    // const [cartItems, setCartItems] = useState([])
+    const {cartItems, setCartItems} = useCart();
+
+
     const {user} = useContext(Context)
     const [loading, setLoading] = useState(true)
+
+    const [isOpen, setIsOpen] = useState(false);
+
+
+
 
     useEffect(() => {
         check().then(data => {
@@ -23,10 +41,18 @@ const App = observer(() => {
         return <Spinner animation={"grow"}/>
     }
 
+    const onRemoveItem = (id) => {
+        setCartItems((prev) => prev.filter(item => item.id !== id))
+    }
+
     return (
         <BrowserRouter>
-            <NavBar />
+
+            {isOpen ? <Basket onRemove={onRemoveItem} items={cartItems} onClickClose={() => setIsOpen(false)}></Basket> : null}
+            <NavBar onClickCart={() => setIsOpen(true)} />
             <AppRouter />
+
+
         </BrowserRouter>
     );
 });

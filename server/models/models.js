@@ -25,6 +25,13 @@ export const Device = sequelize.define('device', {
     img: {type: DataTypes.STRING, allowNull: false},
 })
 
+export const Suppliers = sequelize.define('suppliers', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name: {type: DataTypes.STRING, unique: true, allowNull: false},
+    surname: {type: DataTypes.STRING, allowNull: false},
+    items: {type:DataTypes.JSONB,allowNull:false}
+})
+
 export const Type = sequelize.define('type', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
@@ -39,6 +46,8 @@ export const Rating = sequelize.define('rating', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     rate: {type: DataTypes.INTEGER, allowNull: false},
 })
+
+
 
 export const DeviceInfo = sequelize.define('device_info', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -88,7 +97,8 @@ const model = {
     Brand,
     Rating,
     TypeBrand,
-    DeviceInfo
+    DeviceInfo,
+    Suppliers
 }
 
 export default model;

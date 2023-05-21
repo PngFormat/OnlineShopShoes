@@ -1,3 +1,5 @@
+import * as console from "console";
+
 export interface IType{
     id?: number;
     name?: string;
@@ -9,12 +11,22 @@ export interface IBrand{
 }
 
 export interface IDevice{
+    img?: string;
     id?: number;
     name?: string;
     price?: number;
-    image?: string;
     rating?: number;
     info?: any[];
+
+}
+
+export interface ISupplier {
+    name: string,
+    surname: string,
+    items: {
+        title: string,
+        price: number | string
+    }
 }
 
 export interface IInfo{

@@ -9,16 +9,9 @@ class DeviceController{
     create = async(req,res,next) => {
         const __dirname = path.resolve();
         try {
-            let {name, price, brandId, typeId, info} = req.body;
-            let img;
-            if(req.files){
-                img = req.files.img
-            }
-            let fileName = uuid.v4() + ".jpg";
+            let {name, price, brandId, typeId, info,img} = req.body;
 
-            img && await img.mv(path.resolve(__dirname, 'static', fileName));
-
-            const device = await Device.create({name, price, brandId, typeId, img: fileName ? fileName : null});
+            const device = await Device.create({name, price, brandId, typeId, img: img});
 
               if(info){
                   info = JSON.parse(info);
@@ -64,7 +57,7 @@ class DeviceController{
         return res.json(device)
     }
     deleteOne = async(req,res) => {
-        const {id} = req.body
+        const {id} = req.params
         await Device.destroy({where: {id}})
         return res.json(`Device with id ${id} has been removed`)
     }

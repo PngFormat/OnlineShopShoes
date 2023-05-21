@@ -6,6 +6,10 @@ import DevicePage from "./pages/DevicePage";
 import Shop from "./pages/Shop";
 import {AuthorisedPath, UnauthorisedPath} from "./utils/Path";
 import MainPage from "./pages/MainPage";
+import ManShoes from "./pages/ManShoes";
+import WomanShoes from "./pages/WomanShoes";
+import FavoritePage from "./pages/FavoritePage";
+import PaymentsPage from "./pages/PaymentsPage";
 
 export const authRoutes = [
  {
@@ -38,5 +42,21 @@ export const publicRoutes = [
     {
         path: UnauthorisedPath.MAINPAGE_ROUTE,
         Component: MainPage
+    },
+    {
+        path: UnauthorisedPath.MANPAGE_ROUTE,
+        Component: ManShoes
+    },
+    {
+        path: UnauthorisedPath.WOMANPAGE_ROUTE,
+        Component: WomanShoes
+    },
+    {
+        path: UnauthorisedPath.FAVORITEPAGE_ROUTE,
+        Component: FavoritePage
+    },
+    {
+        path: UnauthorisedPath.PAYMENTPAGE_ROUTE,
+        Component: PaymentsPage
     }
 ]

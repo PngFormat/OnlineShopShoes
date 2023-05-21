@@ -1,0 +1,154 @@
+.drawer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 450px;
+  height: 100%;
+  right:0;
+  background: #243b42;
+  box-shadow: -10px 4px 24px rgba(0,0,0,0.1);
+  padding: 30px;
+  color: #71c6e3;
+
+  .items {
+    flex:1;
+    overflow: auto;
+    margin-bottom: 40px;
+  }
+
+
+  h3 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+
+}
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1;
+}
+.imgCart {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding-left: 0px;
+  padding-bottom: 0px;
+}
+
+.cartItem {
+  width: 100%;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  border: 1px solid;
+  border-radius:20px ;
+  display: flex;
+  overflow: hidden;
+  max-height: 150px;
+
+  .cartItemImg{
+    height: 70px;
+    width: 70px;
+    background-size: contain;
+    background-position: center;
+    margin-right:0px;
+  }
+
+  .block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .title{
+    margin-top: 20px;
+    height: 80px;
+  }
+  p {
+    margin-top: 15px;
+    font-size:16px;
+    margin: 0;
+  }
+  b{
+    font-size: 20px;
+  }
+  img {
+
+  }
+}
+.removeBtn {
+  max-width: 120px;
+  max-height: 70px;
+  transition: opacity 0.3s ease-in-out;
+  cursor: pointer;
+  opacity: 0.5;
+  margin-left: auto;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.cartTotalBlock {
+  margin-top: 400px;
+  ul {
+    margin-bottom: 40px !important;
+    li {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 20px;
+    }
+
+    div {
+      flex: 1;
+      height: 1px;
+      border-bottom: 1px dashed #7b9cc2;
+      position: relative;
+      top: -4px;
+      margin: 0 7px;
+    }
+
+  }
+
+
+}
+.greenButton {
+  position: relative;
+  &:hover{
+    img{
+      transform: translateX(30px);
+    }
+  }
+  button {
+    width: 100%;
+    font-weight: 500;
+    height: 55px;
+    border: 0;
+    color: white;
+    font-size: 16px;
+    background: #9ec0db ;
+    border-radius: 18px;
+    cursor: pointer;
+    transition :background 0.15s ease-in-out;
+    &:hover{
+      background: lighten($color: #02adef, $amount:10%);
+    }
+    &:active{
+      background: darken($color: #00141c, $amount:10%);
+    }
+
+    img {
+      position: absolute;
+      right: 30px;
+      bottom: 1px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+  }
+}
+
+

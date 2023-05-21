@@ -2,14 +2,13 @@ import express from "express"
 import dotenv from "dotenv"
 import sequelize from "./db.js"
 import cors from "cors"
-import models from "../server/models/models.js"
 import fileUpload from "express-fileupload"
 import errorHandler from "./middleware/ErrorHandlingMiddleware.js"
 import router from "./routes/index.js"
 import path from "path"
+import suppliersRouter from "./routes/suppliersRouter.js";
+
 dotenv.config();
-
-
 
 const __dirname = path.resolve()
 const app = express()
@@ -19,10 +18,16 @@ app.use(cors());
 app.use(express.json())
 app.use(express.static(path.resolve(__dirname,'static')))
 app.use(fileUpload({}))
+
 app.use('/api', router)
 
 //last middleware
 app.use(errorHandler)
+
+app.get('/', function(req, res) {
+  res.send('hello world');
+});
+
 
 const start = async () => {
   try {
@@ -33,5 +38,7 @@ const start = async () => {
       console.log(error);
   }
 }
+
+
 
 start();

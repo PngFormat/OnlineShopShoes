@@ -1,8 +1,14 @@
 .card{
-    max-width: 150px;
-    cursor: pointer;
+    max-width: 200px;
+
 }
 .image{
-    width: 148px;
+    margin: 15px;
+    border: 1px solid #9ec0db;
+    border-radius: 50px;
+    width: 170px;
     height: 148px;
+}
+.plus {
+    cursor: pointer;
 }

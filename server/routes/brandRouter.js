@@ -6,7 +6,6 @@ const router = new Router();
 
 router.post('/',roleMiddleware("ADMIN"),brandController.create)
 router.get('/',brandController.getAll)
-router.delete('/',roleMiddleware("ADMIN"),brandController.deleteOne)
-
+router.delete('/:id',brandController.deleteOne)
 
 export default router;

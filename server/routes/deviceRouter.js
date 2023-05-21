@@ -4,9 +4,10 @@ import roleMiddleware from "../middleware/roleMiddleware.js";
 
 const router = new Router();
 
-router.post('/',roleMiddleware("ADMIN"),deviceController.create)
+router.post('/',deviceController.create)
 router.get('/',deviceController.getAll)
 router.get('/:id',deviceController.getOne)
-router.delete('/',roleMiddleware("ADMIN"),deviceController.deleteOne)
+router.delete('/:id',deviceController.deleteOne)
+
 
 export default router;
