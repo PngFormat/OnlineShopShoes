@@ -5,7 +5,7 @@ import deviceStore from './store/deviceStore';
 import userStore from './store/userStore';
 import CartProvider, {CartContext} from "./Context/cartContext";
 import SearchProvider from "./Context/searchContext";
-import "../src/style/index.css"
+
 
 
 export const Context = React.createContext<any>(null)

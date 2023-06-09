@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from "react";
+import React, {createContext} from "react";
 
 export const CartContext = createContext(null);
 
@@ -14,20 +14,12 @@ CartContext.displayName = "CartContext";
 
 const CartProvider: React.FC = ({ children }) => {
     const [cartItems, setCartItems] = React.useState([]);
-    const [favorites, setFavorites] = useState([]);
 
 
     const value = {
         cartItems,
-        setCartItems,
-        favorites,
-        setFavorites
+        setCartItems
     };
-
-    useEffect(() => {
-        console.log('Карточки', cartItems)
-        console.log('Избранное', favorites)
-    },[cartItems,favorites])
 
     return (
         <CartContext.Provider

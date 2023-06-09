@@ -9,7 +9,6 @@ import MainPage from "./pages/MainPage";
 import ManShoes from "./pages/ManShoes";
 import WomanShoes from "./pages/WomanShoes";
 import FavoritePage from "./pages/FavoritePage";
-import PaymentsPage from "./pages/PaymentsPage";
 
 export const authRoutes = [
  {
@@ -54,9 +53,5 @@ export const publicRoutes = [
     {
         path: UnauthorisedPath.FAVORITEPAGE_ROUTE,
         Component: FavoritePage
-    },
-    {
-        path: UnauthorisedPath.PAYMENTPAGE_ROUTE,
-        Component: PaymentsPage
     }
 ]

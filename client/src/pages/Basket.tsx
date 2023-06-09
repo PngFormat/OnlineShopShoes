@@ -1,13 +1,7 @@
 import React, {useState} from 'react'
 import styles from '../style/BasketPage.module.scss'
-import {AuthorisedPath, UnauthorisedPath} from "../utils/Path";
-import {useHistory} from "react-router-dom";
 const Basket = ({onClickClose,onRemove, items }) => {
 
-    const history = useHistory();
-
-    const itemsPrice = items.reduce((acc, item) => acc += Number(item.price), 0 )
-    console.log(itemsPrice)
     return (
             <div>
                 <div className='wrapper-clear'>
@@ -22,7 +16,8 @@ const Basket = ({onClickClose,onRemove, items }) => {
                                             items.map((obj) => (
 
                                                 <div key={items} style={{display:"flex",alignItems:"center"}} className={styles.cartItem}>
-                                                    <img className={styles.imgCart} src={obj.imageUrl} height='120' width='120' alt='Sneakers'/>
+                                                    {console.log(obj.id)}
+                                                    <img className={styles.imgCart} src='https://images.prom.ua/4379325340_w640_h640_4379325340.jpg' height='120' width='120' alt='Sneakers'/>
                                                     <div className={styles.block}>
                                                         <p className={styles.title}>{obj.title}</p>
                                                         <b>{obj.price} грн</b>
@@ -38,18 +33,16 @@ const Basket = ({onClickClose,onRemove, items }) => {
                                             <li>
                                                 <span>Итого</span>
                                                 <div></div>
-                                                <b>{itemsPrice} {' '}грн</b>
+                                                <b>5000 грн</b>
                                             </li>
                                             <li >
                                                 <span>Налог 20%</span>
                                                 <div></div>
-                                                <b>{itemsPrice * 0.2} {' '}грн</b>
+                                                <b>1000 грн</b>
                                             </li>
                                         </ul>
                                         <div className={styles.greenButton}>
-                                            <button onClick={() => {
-                                                onClickClose()
-                                                history.push(UnauthorisedPath.PAYMENTPAGE_ROUTE)}} >Оформить заказ  <img src='https://pngimg.com/uploads/red_arrow/red_arrow_PNG49.png' width='70' height='60'></img> </button>
+                                            <button>Оформить заказ <img src='https://pngimg.com/uploads/red_arrow/red_arrow_PNG49.png' width='70' height='60'></img> </button>
                                         </div>
                                     </div>
                                 </div>

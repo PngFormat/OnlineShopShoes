@@ -29,12 +29,12 @@ const DeviceItem: React.FC<DeviceItemProps> = ({device,onPlus,onFavorite,favorit
     const [isFavorite, setIsFavorite] = useState(favorited);
 
     const onClickPlus = () => {
-        onPlus(device.id,device.name,device.price,device.img);
+        onPlus(device.id,device.name,device.price,device.image);
         setIsAdded(!isAdded);
     }
 
     const onClickFavorite = () => {
-        onFavorite(device.id,device.name,device.price,device.img);
+        onFavorite(device.id,device.name,device.price,device.image);
         setIsFavorite(!isFavorite)
     }
 
@@ -42,7 +42,7 @@ const DeviceItem: React.FC<DeviceItemProps> = ({device,onPlus,onFavorite,favorit
     return (
         <Col xs={3} sm={3} md={3} lg={3} xl={3} className='mt-3' >
              <Card className={styles.card} border={"dark"}>
-                <Image onClick={() => history.push(UnauthorisedPath.DEVICE_ROUTE + '/' + device.id)} className={styles.image} src={device.img}/>
+                <Image onClick={() => history.push(UnauthorisedPath.DEVICE_ROUTE + '/' + device.id)} className={styles.image} src={'https://images.shafastatic.net/175118176'}/>
                 <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
                     <div>Shoes...</div>
                     <div className="d-flex align-items-center">
@@ -57,8 +57,6 @@ const DeviceItem: React.FC<DeviceItemProps> = ({device,onPlus,onFavorite,favorit
                 </div>
 
                 <div>{device.name}</div>
-                 <div className='btn-primary '>
-                     <h5>{device.price} {''} грн</h5></div>
                  <div className='favorite'>
                      <img onClick={onClickFavorite}  className='p-1 mb-0' src={isFavorite ? ' https://freesvg.org/img/heart_jon_phillips_01.png'
                          : 'https://cdn.onlinewebfonts.com/svg/img_491354.png' } alt='Unliked' width='40'></img>

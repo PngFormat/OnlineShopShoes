@@ -13,7 +13,6 @@ import DeviceItem from "./components/DeviceItem";
 import DeviceList from "./components/DeviceList";
 import {useCart} from "./Context/cartContext";
 import FavoritePage from "./pages/FavoritePage";
-import PeopleList from "./components/FetchSuppliers";
 
 
 const App = observer(() => {
@@ -47,7 +46,6 @@ const App = observer(() => {
 
     return (
         <BrowserRouter>
-
             {isOpen ? <Basket onRemove={onRemoveItem} items={cartItems} onClickClose={() => setIsOpen(false)}></Basket> : null}
             <NavBar onClickCart={() => setIsOpen(true)} />
             <AppRouter />

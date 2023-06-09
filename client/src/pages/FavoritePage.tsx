@@ -1,39 +1,33 @@
 import styles from "../style/WomanShoes.module.scss";
+
 import React, {useContext} from "react";
 import {Row} from "react-bootstrap";
-import {useCart} from "../Context/cartContext";
-import DeviceList from "../components/DeviceList";
+import {IDevice} from "../types/deviceTypes";
 import DeviceItem from "../components/DeviceItem";
+import {Context} from "../index";
+const FavoritePage = ({items}) => {
 
-const FavoritePage = () => {
-
-    const {favorites} = useCart();
-
+    const {device} = useContext(Context)
     return(
-        <div>
-            <Row className='w-100'>
-                <h1>Список избранного</h1>
-                {
-                    favorites.map( (item) => {
-                        console.log(item)
-                        const modifiedItem = {...item, img: item.imageUrl, name: item.title}
-                        return(
+        <Row className=''>
+            <h1>Список избранного</h1>
 
-                            <DeviceItem
-                            key={item.id}
-                            device={modifiedItem}
-                            favorited={true}/>
+            {console.log(items)}
+                {items && items
+                    .map((item,index) => (
+                        <div key={index}>
+                            <h2>{item.title}</h2>
 
-                        )
-
-
-                    })
-                }
+                        </div>
+                        // <DeviceItem key={index}
+                        //     title={item.name}
+                        //
+                        //     device={device}
+                        // />
+                    ))}
 
 
-
-            </Row>
-        </div>
+        </Row>
     )
 
 

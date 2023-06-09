@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import { Container,Col,Image,Row,Button,Card } from 'react-bootstrap'
 //import deviceStore from '../store/deviceStore'
 import styles from "../style/DevicePage.module.scss"
@@ -6,18 +6,9 @@ import bigStar from "../assets/bigStar.png"
 import { IDevice } from '../types/deviceTypes'
 import { useParams } from 'react-router'
 import { fetchOneDevice } from '../http/deviceApi'
-import {useCart} from "../Context/cartContext";
-import {Context} from "../index";
 
 
 const DevicePage = () => {
-    const {setCartItems, favorites, setFavorites} = useCart();
-
-
-
-    const onAddToCart = (id,title,price,imageUrl) => {
-        setCartItems(prev => [...prev,{id,title,price,imageUrl}]);
-    }
 
     const [device,setDevice] = React.useState<IDevice>({info: []});
     const {id} = useParams<any>();
@@ -29,7 +20,7 @@ const DevicePage = () => {
         <Container className="mt-3">
             <Row>
             <Col xs={4} sm={4} md = {4} lg={4}>
-             <Image width={300} height={300} src={device.img}/>
+             <Image width={400} height={300} src={'https://images.shafastatic.net/175118176'}/>
                 {/*'http://localhost:3000/' + device.image*/}
             </Col>
             <Col xs={4} sm={4} md = {4} lg={4}>
@@ -43,8 +34,7 @@ const DevicePage = () => {
              <Col xs={4} sm={4} md = {4} lg={4}>
                 <Card className={styles.card}>
                   <h3 style={{fontSize:23}}>Starting out: {device.price} grn</h3>
-                  <Button
-                      variant={'outline-success'}>Add to cart</Button>
+                  <Button variant={'outline-success'}>Add to cart</Button>
                 </Card>
              </Col>
             </Row>

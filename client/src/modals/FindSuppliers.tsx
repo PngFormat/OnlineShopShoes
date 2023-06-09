@@ -1,6 +1,6 @@
 import React, { MouseEventHandler,useState,useEffect } from 'react'
 import { Modal,Button,Form } from 'react-bootstrap';
-import {createBrand, getSuppliers} from "../http/deviceApi"
+import {createBrand} from "../http/deviceApi"
 
 
 
@@ -10,10 +10,8 @@ interface CreateSuppliersProps{
 }
 
 const FindSuppliers: React.FC<CreateSuppliersProps> = ({show,onHide}) => {
-
     const [value,setValue] = useState<string | undefined>('');
     const [people, setPeople] = useState([]);
-    const [choosenSupplier, setChoosenSupplier] = useState(null);
 
     const addBrand = () => {
         createBrand({name: value}).then(() => {
@@ -24,9 +22,10 @@ const FindSuppliers: React.FC<CreateSuppliersProps> = ({show,onHide}) => {
 
     useEffect(() => {
         // Получение списка людей с сервера
-          getSuppliers()
+        fetch('/people')
+            .then(response => response.json())
             .then(data => setPeople(data))
-            .catch(error => console.error('Error fetching people:', error.message));
+            .catch(error => console.error('Error fetching people:', error));
     }, []);
 
     return (
@@ -50,44 +49,29 @@ const FindSuppliers: React.FC<CreateSuppliersProps> = ({show,onHide}) => {
                         Выберите поставщика
                     </Modal.Title>
                         <div className="dropdown">
-                            <button  className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                 Кнопка выпадающего списка
                             </button>
-
-                            <div>
-                                {people.map(person => (
-                                    <button onClick={() => setChoosenSupplier(person)} className="btn btn-primary" key={person.id}>{person.name}</button>
-                                ))}
-                            </div>
-
+                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a className="dropdown-item" href="#">Действие</a></li>
+                                <li><a className="dropdown-item" href="#">Другое действие</a></li>
+                                <li><a className="dropdown-item" href="#">Что-то еще здесь</a></li>
+                            </ul>
                         </div>
 
                     <Modal.Title className='mt-5' id="contained-modal-title-vcenter">
                         Выберите товар
                     </Modal.Title>
-                        {!!choosenSupplier &&
 
-                            <div>
-                                {
-                                    choosenSupplier.items.map(item => (
-                                        <div>
-                                            {
-                                                item.title
-                                            }
-
-                                            {
-                                                item.price
-                                            }
-                                        </div>
-                                    ))
-                                }
-                            </div>
-                        }
 
                     <div>
 
-
+                        <ul>
+                            {people.map(person => (
+                                <li key={person.id}>{person.name}</li>
+                                    ))}
+                                </ul>
                                 </div>
 
 
