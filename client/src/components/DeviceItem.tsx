@@ -7,6 +7,9 @@ import { UnauthorisedPath } from '../utils/Path';
 import star from "../assets/star.png"
 import * as console from "console";
 import ContentLoader from "react-content-loader";
+import { useLocation } from 'react-router-dom';
+import {useCart} from "../Context/cartContext";
+
 
 interface DeviceItemProps {
     device?: IDevice;
@@ -29,6 +32,10 @@ const DeviceItem: React.FC<DeviceItemProps> = ({device,onPlus,onFavorite,favorit
     const [isFavorite, setIsFavorite] = useState(favorited);
     const [isLoading, setIsLoading] = useState(true);
     const [showCard, setShowCard] = useState(false);
+    const {gender} = useCart()
+
+
+
 
     useEffect(() => {
         setIsLoading(true);
@@ -73,6 +80,58 @@ const DeviceItem: React.FC<DeviceItemProps> = ({device,onPlus,onFavorite,favorit
                     <rect x="113" y="163" rx="0" ry="0" width="28" height="19" />
                 </ContentLoader>
             ) : showCard ? (
+                <div>
+                    {gender === 'Female' && device.gender === 'Female' && (
+                            <Card className={styles.card} border='dark'>
+                                {/* Контент для отображения после загрузки */}
+                                <Image
+                                    onClick={() => history.push(UnauthorisedPath.DEVICE_ROUTE + '/' + device.id)}
+                                    className={styles.image}
+                                    src={device.image}
+                                />
+                                <div className='text-black-50 mt-1 d-flex justify-content-between align-items-center'>
+                                    <div>Shoes...</div>
+                                    <div className='d-flex align-items-center'>
+                                        <div>{device.rating}</div>
+                                        <Image width={18} height={18} src={star} />
+                                        <img
+                                            onClick={onClickPlus}
+                                            className={styles.plus}
+                                            src={
+                                                isAdded
+                                                    ? 'https://www.kindpng.com/picc/m/19-191997_plus-png-plus-icon-png-flat-transparent-png.png'
+                                                    : 'https://www.pngplay.com/wp-content/uploads/12/Plus-PNG-HD-Quality.png'
+                                            }
+                                            width={60}
+                                            height={60}
+                                            alt='plus'
+                                        />
+                                    </div>
+                                </div>
+                                <div>{device.name}</div>
+                                <div className='btn-primary'>
+                                    <h5>
+                                        {device.price} {''} грн
+                                    </h5>
+                                </div>
+                                <div className='favorite'>
+                                    <img
+                                        onClick={onClickFavorite}
+                                        className='p-1 mb-0'
+                                        src={
+                                            isFavorite
+                                                ? 'https://freesvg.org/img/heart_jon_phillips_01.png'
+                                                : 'https://cdn.onlinewebfonts.com/svg/img_491354.png'
+                                        }
+                                        alt='Unliked'
+                                        width='40'
+                                    ></img>
+                                </div>
+                            </Card>
+                        ) }
+                </div>
+            ) : null}
+            {gender === 'Male' && device.gender === 'Male' && (
                 <Card className={styles.card} border='dark'>
                     {/* Контент для отображения после загрузки */}
                     <Image
@@ -119,7 +178,7 @@ const DeviceItem: React.FC<DeviceItemProps> = ({device,onPlus,onFavorite,favorit
                         ></img>
                     </div>
                 </Card>
-            ) : null}
+            )}
         </Col>
     );
 };

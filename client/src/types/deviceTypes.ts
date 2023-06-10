@@ -17,6 +17,7 @@ export interface IDevice{
     image?: string;
     rating?: number;
     info?: any[];
+    gender?: string;
 
 }
 

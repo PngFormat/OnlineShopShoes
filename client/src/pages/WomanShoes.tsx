@@ -7,15 +7,28 @@ import styles from "../style/WomanShoes.module.scss"
 import {NavLink} from "react-router-dom";
 import {UnauthorisedPath} from "../utils/Path";
 import Basket from "./Basket";
+import {useCart} from "../Context/cartContext";
 
 
 const WomanShoes = () => {
 
+    const {gender, setGender} = useCart()
+
+    const updateGender = () => {
+        setGender('Female')
+        console.log(gender)
+
+    }
+
     return(
         <div className={styles.mainblock}>
             <div className={styles.firstimg}>
-                <NavLink className = {styles.navLink} to = {UnauthorisedPath.DEVICE_ROUTE}>Жіноче взуття</NavLink>
-
+                <NavLink
+                    onClick={updateGender}
+                    className={styles.navLink}
+                    to={UnauthorisedPath.DEVICE_ROUTE + '?gender=Female'}>
+                    Жіноче взуття
+                </NavLink>
                 <p className={styles.text}>Стильная мужская обувь может быть и красивой, и комфортной.  </p>
                 <p className={styles.text}> Как ни крути, выбирая пару, именно удобство - главное преимущество.</p>
             </div>

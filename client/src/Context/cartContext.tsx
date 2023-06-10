@@ -14,11 +14,14 @@ CartContext.displayName = "CartContext";
 
 const CartProvider: React.FC = ({ children }) => {
     const [cartItems, setCartItems] = React.useState([]);
+    const [gender, setGender] = React.useState('');
 
 
     const value = {
         cartItems,
-        setCartItems
+        setCartItems,
+        gender,
+        setGender
     };
 
     return (

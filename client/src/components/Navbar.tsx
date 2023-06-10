@@ -6,15 +6,28 @@ import userStore from '../store/userStore';
 import { observer } from 'mobx-react-lite';
 import {useContext, useState} from "react";
 import {Context} from "../index"
+import cartContext, {useCart} from "../Context/cartContext";
 
 const NavBar = (props) => {
 
     const {user} = useContext(Context)
     const history = useHistory();
+    const {gender, setGender} = useCart()
 
     const logOut = () => {
       user.setUser({})
       user.setIsAuth(false)
+    }
+
+    const updateGenderMan = () => {
+        console.log(gender)
+        setGender('Male')
+
+
+    }
+    const updateGenderWoman = () => {
+        console.log(gender)
+        setGender('Female')
     }
 
     return (
@@ -23,8 +36,15 @@ const NavBar = (props) => {
            <img src="https://freepngimg.com/thumb/categories/627.png" alt="react logo" style={{ width: '80px',height:'80px' }}/>
         <NavLink className = {styles.navLink} to = {UnauthorisedPath.MAINPAGE_ROUTE} >ShoesStyler</NavLink>
            <div className={styles.divBlock}>
-               <NavLink className = {styles.navLink} to = {UnauthorisedPath.MANPAGE_ROUTE}>Чоловіче взуття</NavLink>
-               <NavLink className = {styles.navLink} to = {UnauthorisedPath.WOMANPAGE_ROUTE}>Жіноче взуття</NavLink>
+               <NavLink onClick={updateGenderMan}
+                        className = {styles.navLink}
+                        to = {UnauthorisedPath.MANPAGE_ROUTE}>Чоловіче взуття
+               </NavLink>
+               <NavLink
+                   onClick={updateGenderWoman}
+                   className = {styles.navLink}
+                   to = {UnauthorisedPath.WOMANPAGE_ROUTE}>Жіноче взуття
+               </NavLink>
                <NavLink className = {styles.navLink} to = {UnauthorisedPath.MAINPAGE_ROUTE}>Дитяче взуття</NavLink>
            </div>
 

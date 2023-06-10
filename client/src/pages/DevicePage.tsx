@@ -8,7 +8,9 @@ import { useParams } from 'react-router'
 import { fetchOneDevice } from '../http/deviceApi'
 
 
+
 const DevicePage = () => {
+
 
     const [device,setDevice] = React.useState<IDevice>({info: []});
     const {id} = useParams<any>();
