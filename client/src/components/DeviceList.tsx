@@ -14,26 +14,31 @@ import FavoritePage from "../pages/FavoritePage";
 
 const DeviceList = observer((items) => {
     const {searchValue} = useSearch();
-    const {setCartItems} = useCart();
+    const {cartItems,setCartItems, favorites, setFavorites} = useCart();
     const {device} = useContext(Context)
 
-    const [favorites, setFavorites] = useState([]);
+
     const onAddToCart = (id,title,price,imageUrl) => {
-        setCartItems(prev => [...prev,{id,title,price,imageUrl}]);
+        if (cartItems.find((item) => item.id === id)) {
+            setCartItems(prev => prev.filter(item => item.id !== id ));
+        }
+        else {
+            setCartItems(prev => [...prev,{id,title,price,imageUrl}]);
+        }
+
     }
 
     const onAddToFavorite = (id,title,price,imageUrl) => {
         setFavorites(prev => [...prev,{id,title,price,imageUrl}]);
 
     }
-
-
-
+    console.log(device.devices)
     return (
 
         <Row className=''>
 
             {device.devices
+
                 .filter((device) => device.name.toLowerCase().includes(searchValue))
                 .map((device: IDevice) => (
                     <DeviceItem
@@ -43,17 +48,11 @@ const DeviceList = observer((items) => {
                         device={device}
                     />
 
+
                 ))}
-            {console.log(favorites)}
 
 
 
-            {/*/!*<Router>*!/*/}
-            {/*/!*    <Route path="/favorite">*!/*/}
-            {/*        <FavoritePage items={favorites} />*/}
-            {/*/!*    </Route>*!/*/}
-
-            {/*</Router>*/}
         </Row>
     )
 })

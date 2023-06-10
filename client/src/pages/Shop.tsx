@@ -10,15 +10,15 @@ import Paginatio from "../components/Pagination"
 import {IPagi} from '../types/deviceTypes';
 import styles from "../style/ShopPage.module.scss"
 import {useSearch} from "../Context/searchContext";
-import {useCart} from "../Context/cartContext";
+
 
 const Shop = observer(() => {
 
     const {device} = React.useContext(Context)
     const {searchValue, setSearchValue} = useSearch();
-    const onChangeSearchInput = (event) => {
-        setSearchValue(event.target.value);
-    }
+    // const onChangeSearchInput = (event) => {
+    //     setSearchValue(event.target.value);
+    // }
 
     useEffect(() =>{
       fetchTypes().then((data: string[]) => device.setTypes(data));
@@ -30,7 +30,7 @@ const Shop = observer(() => {
     }, [])
     useEffect(() =>{
         try {
-            fetchDevices(device.selectedType.id, device.selectedBrand.id, device.page, 5).then((data: IPagi) => {
+            fetchDevices(device.page, 5).then((data: IPagi) => {
                 device.setDevices(data?.rows);
                 device.setTotalCount(data?.count)
             })
@@ -40,12 +40,14 @@ const Shop = observer(() => {
     },[device.page, device.selectedType, device.selectedBrand,device])
 
     return (
-        <Container >
+
+        <Container className={styles.container} >
+
             <h1>{searchValue ? `Поиск по запросу "${searchValue}"` : "Все кроссовки"}</h1>
             <div className='m-lg-3 d-flex align-items-center justify-content-end mb-40'>
                 <img src='https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-21.png' alt="Search" width='60'></img>
 
-                <input height='30' width='30' value={searchValue} onChange={onChangeSearchInput} className={styles.search_block}  placeholder='Поиск...'/>
+                <input height='30' width='30' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} className={styles.search_block}  placeholder='Поиск...'/>
                 {searchValue && (<img onClick={() => setSearchValue('')} className={styles.clear} src='https://www.freeiconspng.com/thumbs/remove-icon-png/remove-icon-png-7.png' alt='Clear'></img>)}
             </div>
          <Row>
@@ -56,10 +58,14 @@ const Shop = observer(() => {
 
                 <BrandBar  />
                 <DeviceList />
+                 <div className='d-flex justify-content-center'>
+                     <Paginatio/>
+                 </div>
 
-                <Paginatio />
              </Col>
+
          </Row>
+
         </Container>
     )
 })
