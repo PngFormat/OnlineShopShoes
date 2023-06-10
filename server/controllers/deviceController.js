@@ -9,9 +9,9 @@ class DeviceController{
     create = async(req,res,next) => {
         const __dirname = path.resolve();
         try {
-            let {name, price, brandId, typeId, info,img} = req.body;
+            let {name, price, brandId, typeId, info,img,gender} = req.body;
 
-            const device = await Device.create({name, price, brandId, typeId, img: img});
+            const device = await Device.create({name, price, brandId, typeId, img: img,gender});
 
               if(info){
                   info = JSON.parse(info);
