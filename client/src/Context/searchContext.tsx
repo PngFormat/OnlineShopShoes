@@ -13,7 +13,7 @@ export const useSearch = () => {
 SearchContext.displayName = "CartContext";
 
 const SearchProvider: React.FC = ({ children }) => {
-    const [searchValue, setSearchValue] = React.useState([]);
+    const [searchValue, setSearchValue] = React.useState('');
 
 
     const value = {

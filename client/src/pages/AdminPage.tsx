@@ -8,6 +8,7 @@ import RemoveBrand from '../modals/RemoveBrand'
 import RemoveType from '../modals/RemoveType'
 import RemoveDevice from '../modals/RemoveDevice'
 import FindSuppliers from "../modals/FindSuppliers";
+import ImageSlider from "../components/Sliders";
 
 const AdminPage = () => {
 
@@ -19,8 +20,12 @@ const AdminPage = () => {
     const [deviceRemoveVisible,setDeviceRemoveVisible] = useState(false);
     const [suppliers,setSuppliers] = useState(false);
 
+
     return (
         <Container className="mt-5">
+            <div className='d-flex justify-content-center w-100'>
+                <img className='' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvgRMad98wVTdc-qAMIhYEF6tJ0QVKdJ03oA&usqp=CAU' width={500}></img>
+            </div>
             <Row style={{backgroundColor: '#112b26',color: '#FFF'}}>
               <Button onClick={() => setTypeCreateVisible(true)} variant={"outline-success"} className="p-2 mt-1">Create type</Button>
               <Button onClick={() => setBrandCreateVisible(true)} variant={"outline-success"} className="p-2 mt-1">Create brand</Button>
@@ -40,9 +45,14 @@ const AdminPage = () => {
             <RemoveType show={typeRemoveVisible} onHide={() => setTypeRemoveVisible(false)}/>
 
             <FindSuppliers show={suppliers} onHide={() => setSuppliers(false)}/>
+            <div className='d-flex justify-content-center w-100'>
+                <ImageSlider></ImageSlider>
+            </div>
+
         </Container>
 
     )
 }
+
 
 export default AdminPage

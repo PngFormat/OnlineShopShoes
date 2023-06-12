@@ -14,7 +14,7 @@ export interface IDevice{
     id?: number;
     name?: string;
     price?: number;
-    image?: string;
+    img?: string;
     rating?: number;
     info?: any[];
     gender?: string;

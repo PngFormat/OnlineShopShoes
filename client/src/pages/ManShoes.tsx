@@ -6,23 +6,14 @@ import AppFooter from "../components/AppFooter";
 import styles from "../style/ManShoes.module.scss"
 import {NavLink} from "react-router-dom";
 import {UnauthorisedPath} from "../utils/Path";
-import {useCart} from "../Context/cartContext";
 
 
 const ManShoes = () => {
 
-    const {gender, setGender} = useCart()
-
-    const updateGender = () => {
-        setGender('Male')
-        console.log(gender)
-
-    }
-
     return(
         <div className={styles.mainblock}>
             <div className={styles.firstimg}>
-                <NavLink className = {styles.navLink} to={UnauthorisedPath.DEVICE_ROUTE + '?gender=Male'}>Чоловіче взуття</NavLink>
+                <NavLink className = {styles.navLink} to = {UnauthorisedPath.DEVICE_ROUTE}>Чоловіче взуття</NavLink>
 
                     <p className={styles.text}>Стильная мужская обувь может быть и красивой, и комфортной.  </p>
                     <p className={styles.text}> Как ни крути, выбирая пару, именно удобство - главное преимущество.</p>

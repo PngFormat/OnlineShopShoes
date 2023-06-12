@@ -12,5 +12,6 @@ export enum UnauthorisedPath{
     MAINPAGE_ROUTE = '/main',
     MANPAGE_ROUTE = '/man',
     WOMANPAGE_ROUTE = '/woman',
-    FAVORITEPAGE_ROUTE = '/favorite'
+    FAVORITEPAGE_ROUTE = '/favorite',
+    PAYMENTPAGE_ROUTE = '/payment'
 }
