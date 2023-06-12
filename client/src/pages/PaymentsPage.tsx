@@ -1,60 +1,76 @@
 import React, { useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
+import {useCart} from "../Context/cartContext";
+import {useLocation} from "react-router-dom";
+
+interface LocationState {
+    itemsPrice: number;
+}
 
 const PaymentPage = () => {
     const [cardNumber, setCardNumber] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
     const [cvv, setCvv] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const location = useLocation<LocationState>();
+    const { itemsPrice } = location.state || { itemsPrice: 0 };
+
 
     const handlePayment = async () => {
         setIsLoading(true);
+
+        // Simulating payment processing delay
+        await new Promise((resolve) => setTimeout(resolve, 2000));
 
         setIsLoading(false);
         alert('Платеж успешно обработан!');
     };
 
     return (
-        <div className="text-3xl flex justify-center items-center h-screen bg-gray-100">
-            <div className="bg-white p-8 rounded shadow-md w-96">
-
-                <h1 className="text-2xl font-bold mb-6">Страница оплаты</h1>
-                <form>
-                    <div className="mb-4">
-                        <label className="block mb-2 font-bold">Номер карты:</label>
-                        <input
+        <div className="d-flex justify-content-center align-items-center h-200 bg-gray-100">
+            <div className="bg-white p-4 rounded shadow-md w-700">
+                <h1 className="text-center mb-4">Страница оплаты</h1>
+                <Form>
+                    <Form.Group controlId="cardNumber">
+                        <Form.Label>Номер карты:</Form.Label>
+                        <Form.Control
                             type="text"
                             value={cardNumber}
                             onChange={(e) => setCardNumber(e.target.value)}
-                            className="w-full border border-gray-300 p-2 rounded"
+                            placeholder="Введите номер карты"
                         />
+                    </Form.Group>
+                    <div className="d-flex">
+                        <Form.Group className="mr-2" controlId="expiryDate">
+                            <Form.Label>Срок действия:</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={expiryDate}
+                                onChange={(e) => setExpiryDate(e.target.value)}
+                                placeholder="MM/YY"
+                            />
+                        </Form.Group>
+                        <Form.Group className="ml-2" controlId="cvv">
+                            <Form.Label>CVV:</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={cvv}
+                                onChange={(e) => setCvv(e.target.value)}
+                                placeholder="CVV"
+                            />
+                        </Form.Group>
                     </div>
-                    <div className="mb-4">
-                        <label className="block mb-2 font-bold">Срок действия:</label>
-                        <input
-                            type="text"
-                            value={expiryDate}
-                            onChange={(e) => setExpiryDate(e.target.value)}
-                            className="w-full border border-gray-300 p-2 rounded"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block mb-2 font-bold">CVV:</label>
-                        <input
-                            type="text"
-                            value={cvv}
-                            onChange={(e) => setCvv(e.target.value)}
-                            className="w-full border border-gray-300 p-2 rounded"
-                        />
-                    </div>
-                    <button
+                    <Button
                         type="button"
                         onClick={handlePayment}
                         disabled={isLoading}
-                        className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
+                        className="w-100 mt-4"
+                        variant="primary"
                     >
                         {isLoading ? 'Оплата...' : 'Оплатить'}
-                    </button>
-                </form>
+                    </Button>
+                    <p>Сумма покупки: {itemsPrice} грн</p>
+                </Form>
             </div>
         </div>
     );

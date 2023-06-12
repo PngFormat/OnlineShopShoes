@@ -23,7 +23,7 @@ const CartProvider: React.FC = ({ children }) => {
         favorites,
         setFavorites,
         gender,
-        setGender
+        setGender,
     };
 
     useEffect(() => {

@@ -2,11 +2,16 @@ import React, {useState} from 'react'
 import styles from '../style/BasketPage.module.scss'
 import {AuthorisedPath, UnauthorisedPath} from "../utils/Path";
 import {useHistory} from "react-router-dom";
+
 const Basket = ({onClickClose,onRemove, items }) => {
 
     const history = useHistory();
-
     const itemsPrice = items.reduce((acc, item) => acc += Number(item.price), 0 )
+    // const itemsPrice = items.reduce((acc, item) => acc + Number(item.price), 0);
+    // history.push({
+    //     state: { itemsPrice }
+    // });
+
     console.log(itemsPrice)
     return (
             <div>
@@ -49,7 +54,14 @@ const Basket = ({onClickClose,onRemove, items }) => {
                                         <div className={styles.greenButton}>
                                             <button onClick={() => {
                                                 onClickClose()
-                                                history.push(UnauthorisedPath.PAYMENTPAGE_ROUTE)}} >Оформить заказ  <img src='https://pngimg.com/uploads/red_arrow/red_arrow_PNG49.png' width='70' height='60'></img> </button>
+                                                // UnauthorisedPath.PAYMENTPAGE_ROUTE
+                                                history.push({
+                                                    pathname: UnauthorisedPath.PAYMENTPAGE_ROUTE,
+                                                    state: {itemsPrice}
+                                                })}}>
+                                                Оформить заказ
+                                                <img src='https://pngimg.com/uploads/red_arrow/red_arrow_PNG49.png' width='70' height='60'></img>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
