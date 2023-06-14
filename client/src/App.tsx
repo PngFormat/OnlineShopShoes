@@ -8,12 +8,7 @@ import {Context} from "./index";
 import {check} from "./http/userApi";
 import {Row, Spinner} from "react-bootstrap";
 import Basket from "./pages/Basket";
-import {IDevice} from "./types/deviceTypes";
-import DeviceItem from "./components/DeviceItem";
-import DeviceList from "./components/DeviceList";
 import {useCart} from "./Context/cartContext";
-import FavoritePage from "./pages/FavoritePage";
-
 
 const App = observer(() => {
 

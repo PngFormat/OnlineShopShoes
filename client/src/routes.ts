@@ -10,6 +10,7 @@ import ManShoes from "./pages/ManShoes";
 import WomanShoes from "./pages/WomanShoes";
 import FavoritePage from "./pages/FavoritePage";
 import PaymentsPage from "./pages/PaymentsPage";
+import KidsPage from "./pages/KidsPage";
 
 export const authRoutes = [
  {
@@ -19,7 +20,11 @@ export const authRoutes = [
  {
      path: AuthorisedPath.BASKET_ROUTE,
      Component: Basket
- }
+ },
+    {
+        path: AuthorisedPath.MAINPAGE_ROUTE,
+        Component: MainPage
+    }
 ];
 
 export const publicRoutes = [
@@ -58,5 +63,9 @@ export const publicRoutes = [
     {
         path: UnauthorisedPath.PAYMENTPAGE_ROUTE,
         Component: PaymentsPage
+    },
+    {
+        path: UnauthorisedPath.KIDSPAGE_ROUTE,
+        Component: KidsPage
     }
 ]

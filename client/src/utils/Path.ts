@@ -1,7 +1,8 @@
 export enum AuthorisedPath{
  ADMIN_ROUTE = '/admin',
  BASKET_ROUTE = '/basket',
- FAVORITEPAGE_ROUTE = '/favorite'
+ FAVORITEPAGE_ROUTE = '/favorite',
+    MAINPAGE_ROUTE = '/main'
  
 }
 export enum UnauthorisedPath{
@@ -13,5 +14,6 @@ export enum UnauthorisedPath{
     MANPAGE_ROUTE = '/man',
     WOMANPAGE_ROUTE = '/woman',
     FAVORITEPAGE_ROUTE = '/favorite',
-    PAYMENTPAGE_ROUTE = '/payment'
+    PAYMENTPAGE_ROUTE = '/payment',
+    KIDSPAGE_ROUTE = '/kids'
 }

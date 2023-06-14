@@ -78,13 +78,13 @@ const PaymentPage = () => {
             <div>
                 <h2>Принимаемые методы платежей</h2>
                 <div className="payment-methods">
-                    <img width={150} height={150} src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Credit-cards.jpg" alt="Кредитная карта" />
-                    <img width={150} height={150} src="https://imgpng.ru/d/credit_card_PNG173.png" alt="Дебетовая карта" />
-                    <img width={150} height={150} src="https://cdn-icons-png.flaticon.com/512/4140/4140803.png" alt="Банковский перевод" />
-                    <img width={150} height={150} src="https://cdn-icons-png.flaticon.com/512/3326/3326632.png" alt="Электронный кошелек" />
-                    <img width={150} height={150} src="https://cdn-icons-png.flaticon.com/512/5341/5341314.png" alt="Криптовалюта" />
-                    <img width={150} height={150} src="https://cdn-icons-png.flaticon.com/512/3069/3069338.png" alt="Наличные" />
-                    <img width={150} height={150} src="https://cdn-icons-png.flaticon.com/512/3366/3366525.png" alt="Мобильный платеж" />
+                    <img width={100} height={100} src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Credit-cards.jpg" alt="Кредитная карта" />
+                    <img width={100} height={100} src="https://imgpng.ru/d/credit_card_PNG173.png" alt="Дебетовая карта" />
+                    <img width={100} height={100} src="https://cdn-icons-png.flaticon.com/512/4140/4140803.png" alt="Банковский перевод" />
+                    <img width={100} height={100} src="https://cdn-icons-png.flaticon.com/512/3326/3326632.png" alt="Электронный кошелек" />
+                    <img width={100} height={100} src="https://cdn-icons-png.flaticon.com/512/5341/5341314.png" alt="Криптовалюта" />
+                    <img width={100} height={100} src="https://cdn-icons-png.flaticon.com/512/3069/3069338.png" alt="Наличные" />
+                    <img width={100} height={100} src="https://cdn-icons-png.flaticon.com/512/3366/3366525.png" alt="Мобильный платеж" />
                 </div>
             </div>
         </div>

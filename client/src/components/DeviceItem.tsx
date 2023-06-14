@@ -176,6 +176,55 @@ const DeviceItem: React.FC<DeviceItemProps> = ({device,onPlus,onFavorite,favorit
                             </div>
                         </Card>
                     )}
+
+                    {gender === 'Kids' && device.gender === 'Kids' && (
+                        <Card className={styles.card} border='dark'>
+                            {/* Контент для отображения после загрузки */}
+                            <Image
+                                onClick={() => history.push(UnauthorisedPath.DEVICE_ROUTE + '/' + device.id)}
+                                className={styles.image}
+                                src={device.img}
+                            />
+                            <div className='text-black-50 mt-1 d-flex justify-content-between align-items-center'>
+                                <div>Shoes...</div>
+                                <div className='d-flex align-items-center'>
+                                    <div>{device.rating}</div>
+                                    <Image width={18} height={18} src={star} />
+                                    <img
+                                        onClick={onClickPlus}
+                                        className={styles.plus}
+                                        src={
+                                            isAdded
+                                                ? 'https://www.kindpng.com/picc/m/19-191997_plus-png-plus-icon-png-flat-transparent-png.png'
+                                                : 'https://www.pngplay.com/wp-content/uploads/12/Plus-PNG-HD-Quality.png'
+                                        }
+                                        width={60}
+                                        height={60}
+                                        alt='plus'
+                                    />
+                                </div>
+                            </div>
+                            <div>{device.name}</div>
+                            <div className='btn-primary'>
+                                <h5>
+                                    {device.price} {''} грн
+                                </h5>
+                            </div>
+                            <div className='favorite'>
+                                <img
+                                    onClick={onClickFavorite}
+                                    className='p-1 mb-0'
+                                    src={
+                                        isFavorite
+                                            ? 'https://freesvg.org/img/heart_jon_phillips_01.png'
+                                            : 'https://cdn.onlinewebfonts.com/svg/img_491354.png'
+                                    }
+                                    alt='Unliked'
+                                    width='40'
+                                ></img>
+                            </div>
+                        </Card>
+                    )}
                 </div>
             }
         </Col>

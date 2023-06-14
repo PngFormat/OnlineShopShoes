@@ -25,7 +25,7 @@ app.use('/api', router)
 app.use(errorHandler)
 
 app.get('/', function(req, res) {
-  res.send('hello world');
+  res.sendFile(path.resolve(__dirname, 'static', 'MainPage.tsx'));
 });
 
 

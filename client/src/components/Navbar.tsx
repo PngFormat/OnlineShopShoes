@@ -23,8 +23,14 @@ const NavBar = (props) => {
         console.log(gender)
         setGender('Male')
 
+    }
+
+    const updateGenderKids = () => {
+        console.log(gender)
+        setGender('Kids')
 
     }
+
     const updateGenderWoman = () => {
         console.log(gender)
         setGender('Female')
@@ -45,7 +51,10 @@ const NavBar = (props) => {
                    className = {styles.navLink}
                    to = {UnauthorisedPath.WOMANPAGE_ROUTE}>Жіноче взуття
                </NavLink>
-               <NavLink className = {styles.navLink} to = {UnauthorisedPath.MAINPAGE_ROUTE}>Дитяче взуття</NavLink>
+               <NavLink onClick={updateGenderKids}
+                        className = {styles.navLink}
+                        to = {UnauthorisedPath.KIDSPAGE_ROUTE}>Дитяче взуття
+               </NavLink>
            </div>
 
         {userStore.isAuth

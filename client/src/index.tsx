@@ -5,6 +5,7 @@ import deviceStore from './store/deviceStore';
 import userStore from './store/userStore';
 import CartProvider, {CartContext} from "./Context/cartContext";
 import SearchProvider from "./Context/searchContext";
+import MainPage from "./pages/MainPage";
 
 
 
