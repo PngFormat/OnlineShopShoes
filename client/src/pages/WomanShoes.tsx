@@ -5,7 +5,7 @@ import AppFooter from "../components/AppFooter";
 // import AppFooter from "../components/AppFooter";
 import styles from "../style/WomanShoes.module.scss"
 import {NavLink} from "react-router-dom";
-import {UnauthorisedPath} from "../utils/Path";
+import {AuthorisedPath, UnauthorisedPath} from "../utils/Path";
 import Basket from "./Basket";
 
 
@@ -15,6 +15,8 @@ const WomanShoes = () => {
         <div className={styles.mainblock}>
             <div className={styles.firstimg}>
                 <NavLink className = {styles.navLink} to = {UnauthorisedPath.DEVICE_ROUTE}>Жіноче взуття</NavLink>
+                <NavLink className = {styles.navLink} to = {AuthorisedPath.CUSTOMPAGE_ROUTE}>Кастомізація взуття</NavLink>
+
 
                 <p className={styles.text}>Стильная мужская обувь может быть и красивой, и комфортной.  </p>
                 <p className={styles.text}> Как ни крути, выбирая пару, именно удобство - главное преимущество.</p>

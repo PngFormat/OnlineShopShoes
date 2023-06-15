@@ -11,6 +11,8 @@ import WomanShoes from "./pages/WomanShoes";
 import FavoritePage from "./pages/FavoritePage";
 import PaymentsPage from "./pages/PaymentsPage";
 import KidsPage from "./pages/KidsPage";
+import CustomPage from "./pages/CustomPage";
+
 
 export const authRoutes = [
  {
@@ -24,6 +26,10 @@ export const authRoutes = [
     {
         path: AuthorisedPath.MAINPAGE_ROUTE,
         Component: MainPage
+    },
+    {
+        path: AuthorisedPath.CUSTOMPAGE_ROUTE,
+        Component: CustomPage
     }
 ];
 
