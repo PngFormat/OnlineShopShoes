@@ -1,9 +1,6 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import {Image} from "react-bootstrap";
-import ReactPDF from '@react-pdf/renderer';
-import { saveAs } from 'file-saver';
-import Pdf from "@mikecousins/react-pdf"
 import jsPDF from 'jspdf';
 
 

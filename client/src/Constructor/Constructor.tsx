@@ -1,29 +1,43 @@
 import React, { useState } from 'react';
+import UpperPartSelector from './UpperPartSelector';
+
+import LacesPartSelector from './LacesPartSelector';
+import SelectedPartsDisplay from './SelectedPartsDisplay';
+import SaveAndOrderButton from './SaveAndOrderButton';
 
 const Constructor = () => {
-    const [selectedParts, setSelectedParts] = useState({}); // Стан для збереження обраних частин кросівка
+    const [selectedParts, setSelectedParts] = useState({
+        upperPart: '',
+        laces: '',
+    });
 
-    // Функція для оновлення обраних частин
+
     const handlePartSelection = (partType, selectedOption) => {
-        setSelectedParts(prevState => ({
+        setSelectedParts((prevState) => ({
             ...prevState,
             [partType]: selectedOption,
         }));
     };
 
-    // Рендерінг конструктора
+    const clearSelection = () => {
+        setSelectedParts({
+            upperPart: '',
+            laces: ''});
+    };
+
     return (
         <div>
-            {/* Компоненти для кожної частини кросівка */}
-            {/* Наприклад: <UpperPartSelector onSelect={handlePartSelection} /> */}
-            {/* Наприклад: <SolePartSelector onSelect={handlePartSelection} /> */}
-            {/* Наприклад: <LacesPartSelector onSelect={handlePartSelection} /> */}
+            <UpperPartSelector onSelect={handlePartSelection}/>
+            <LacesPartSelector
+                availableOptions={['Option 1', 'Option 2', 'Option 3']}
+                selectedOption={selectedParts.laces}
+                onOptionSelect={option => handlePartSelection('laces', option)}
+            />
 
-            {/* Компонент для показу обраних частин */}
-            {/* Наприклад: <SelectedPartsDisplay selectedParts={selectedParts} /> */}
+            <SelectedPartsDisplay clearSelection={clearSelection} selectedParts={selectedParts } />
 
-            {/* Компонент для збереження та замовлення */}
-            {/* Наприклад: <SaveAndOrderButton selectedParts={selectedParts} /> */}
+            <SaveAndOrderButton selectedParts={selectedParts} />
+
         </div>
     );
 };

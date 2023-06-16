@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+
 const ImageSlider = () => {
     const images = [
         "https://static.vecteezy.com/system/resources/previews/017/339/634/original/puma-transparent-background-free-png.png",

@@ -1,13 +1,111 @@
 import React from 'react';
 
-const SelectedPartsDisplay = ({selectedParts}) => {
+interface ISelectedPartsDisplay {
+    selectedParts: any;
+    clearSelection?: () => void;
+    laceImageSrc?: string;
+    onLacesImageClick?: () => void;
+}
+
+const SelectedPartsDisplay: React.FC<ISelectedPartsDisplay> = ({
+                                                                   selectedParts,
+                                                                   clearSelection,
+                                                                   laceImageSrc,
+                                                                   onLacesImageClick,
+                                                               }) => {
+    const handleClearSelection = () => {
+        clearSelection?.();
+    };
+
+    const handleLacesImageClick = () => {
+        onLacesImageClick?.();
+    };
+
     return (
         <div>
-            <h3>Обрані частини</h3>
-            <p>Верхня частина(шнурки) {selectedParts.upperPart}</p>
-            <p>Нижня частина(підошва,колір кросівка) {selectedParts.solePart} </p>
+            <h3>Обране</h3>
+            {selectedParts.upperPart && (
+                <div>
+                    <h4>Upper Part:</h4>
+                    <img
+                        width={100}
+                        height={100}
+                        src={selectedParts.upperPart.imageSrc}
+                        alt={selectedParts.upperPart.name}
+                    />
+                </div>
+            )}
+            {laceImageSrc && (
+                <div>
+                    <h4>Laces:</h4>
+                    <img
+                        width={100}
+                        height={100}
+                        src={laceImageSrc}
+                        alt="Laces"
+                        onClick={handleLacesImageClick}
+                    />
+                </div>
+            )}
+            {/* Add more conditional rendering for other selected parts */}
+            <button onClick={handleClearSelection}>Видалити обране</button>
         </div>
     );
 };
 
 export default SelectedPartsDisplay;
+
+// interface ISelectedPartsDisplay {
+//     selectedParts: any;
+//     clearSelection?: () => void;
+//     laceImageSrc?: string;
+//     onLacesImageClick?: () => void;
+// }
+//
+// const SelectedPartsDisplay: React.FC<ISelectedPartsDisplay> = ({
+//                                                                    selectedParts,
+//                                                                    clearSelection,
+//                                                                    laceImageSrc,
+//                                                                    onLacesImageClick,
+//                                                                }) => {
+//     const handleClearSelection = () => {
+//         clearSelection?.();
+//     };
+//
+//     const handleLacesImageClick = () => {
+//         onLacesImageClick?.();
+//     };
+//
+//     return (
+//         <div>
+//             <h3>Обране</h3>
+//             {selectedParts.upperPart && (
+//                 <div>
+//                     <h4>Upper Part:</h4>
+//                     <img
+//                         width={100}
+//                         height={100}
+//                         src={selectedParts.upperPart.imageSrc}
+//                         alt={selectedParts.upperPart.name}
+//                     />
+//                 </div>
+//             )}
+//             {selectedParts.laces && (
+//                 <div>
+//                     <h4>Laces:</h4>
+//                     <img
+//                         width={100}
+//                         height={100}
+//                         src={selectedParts.laces.imageSrc}
+//                         alt={selectedParts.laces.name}
+//                         onClick={handleLacesImageClick}
+//                     />
+//                 </div>
+//             )}
+//             {/* Add more conditional rendering for other selected parts */}
+//             <button onClick={handleClearSelection}>Видалити обране</button>
+//         </div>
+//     );
+// };
+//
+// export default SelectedPartsDisplay;
