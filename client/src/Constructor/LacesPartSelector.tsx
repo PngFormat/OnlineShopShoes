@@ -1,27 +1,42 @@
+
 import React, { useState } from 'react';
 import SelectedPartsDisplay from './SelectedPartsDisplay';
 
-const LacesPartSelector = ({ availableOptions, selectedOption, onOptionSelect }) => {
+interface ILacesPartSelector {
+    availableOptions: string[];
+    selectedOption: string | null;
+    onOptionSelect: (option: string, imageUrl: string) => void;
+}
+
+const LacesPartSelector: React.FC<ILacesPartSelector> = ({
+                                                             availableOptions,
+                                                             selectedOption,
+                                                             onOptionSelect,
+                                                         }) => {
     const [selectedLacesOption, setSelectedLacesOption] = useState('');
 
-    const handleOptionSelect = (option) => {
+    const handleOptionSelect = (option: string) => {
+        const imageUrl = getLacesImageSrc(option);
         setSelectedLacesOption(option);
-        onOptionSelect(option);
+        onOptionSelect(option, imageUrl);
     };
 
-    const getLacesImageSrc = (option) => {
-        const lacesImages = {
-            option1: 'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png',
-            option2: 'https://imgpng.ru/d/shoelaces_PNG8.png',
+    const getLacesImageSrc = (option: string) => {
+        const lacesImages: { [key: string]: string } = {
+            'Option 1': 'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png',
+            'Option 2': 'https://imgpng.ru/d/shoelaces_PNG8.png',
             // Add links for each laces option
         };
 
-        return lacesImages[option];
+        return lacesImages[option] || '';
     };
 
     const clearChoosen = () => {
         setSelectedLacesOption('');
     };
+
+    const selectedLacesImage = getLacesImageSrc(selectedLacesOption); // Get the selected laces image URL
+    console.log(selectedLacesImage);
 
     return (
         <div>
@@ -34,6 +49,7 @@ const LacesPartSelector = ({ availableOptions, selectedOption, onOptionSelect })
                     </option>
                 ))}
             </select>
+
             {selectedLacesOption && (
                 <img width={100} height={100} src={getLacesImageSrc(selectedLacesOption)} alt="Laces" />
             )}
@@ -41,9 +57,13 @@ const LacesPartSelector = ({ availableOptions, selectedOption, onOptionSelect })
             {/* Pass the selected laces option and image source to SelectedPartsDisplay */}
             <SelectedPartsDisplay
                 clearSelection={clearChoosen}
-                selectedParts={selectedLacesOption}
-                laceImageSrc={getLacesImageSrc(selectedLacesOption)}
-                onLacesImageClick={clearChoosen} // Add the click handler here
+                selectedParts={{
+                    laces: {
+                        option: selectedLacesOption,
+                        imageSrc: selectedLacesImage,
+                    },
+                }}
+                onLacesImageClick={clearChoosen}
             />
 
             <button onClick={clearChoosen}>Очистити</button>

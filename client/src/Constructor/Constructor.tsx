@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import UpperPartSelector from './UpperPartSelector';
-
 import LacesPartSelector from './LacesPartSelector';
 import SelectedPartsDisplay from './SelectedPartsDisplay';
 import SaveAndOrderButton from './SaveAndOrderButton';
@@ -11,33 +10,44 @@ const Constructor = () => {
         laces: '',
     });
 
-
-    const handlePartSelection = (partType, selectedOption) => {
+    const handlePartSelection = (partType, selectedOption, imageUrl) => {
         setSelectedParts((prevState) => ({
             ...prevState,
-            [partType]: selectedOption,
+            [partType]: {
+                option: selectedOption,
+                imageSrc: imageUrl,
+            },
         }));
     };
+
+
 
     const clearSelection = () => {
         setSelectedParts({
             upperPart: '',
-            laces: ''});
+            laces: '',
+        });
     };
 
     return (
         <div>
-            <UpperPartSelector onSelect={handlePartSelection}/>
+            <UpperPartSelector onSelect={handlePartSelection} />
+
             <LacesPartSelector
                 availableOptions={['Option 1', 'Option 2', 'Option 3']}
                 selectedOption={selectedParts.laces}
-                onOptionSelect={option => handlePartSelection('laces', option)}
+                onOptionSelect={(option, imageUrl) =>
+                    handlePartSelection('laces', option, imageUrl)
+                }
             />
 
-            <SelectedPartsDisplay clearSelection={clearSelection} selectedParts={selectedParts } />
+
+            <SelectedPartsDisplay
+                clearSelection={clearSelection}
+                selectedParts={selectedParts}
+            />
 
             <SaveAndOrderButton selectedParts={selectedParts} />
-
         </div>
     );
 };
