@@ -4,6 +4,10 @@ import LacesPartSelector from './LacesPartSelector';
 import SelectedPartsDisplay from './SelectedPartsDisplay';
 import SaveAndOrderButton from './SaveAndOrderButton';
 
+interface IConstructorProps {
+    onLacesColorSelect: (color: string) => void;
+}
+
 interface IConstructorState {
     upperPart: {
         option: string;
@@ -16,7 +20,7 @@ interface IConstructorState {
     // Add more properties for other selected parts
 }
 
-const Constructor = () => {
+const Constructor: React.FC<IConstructorProps> = ({ onLacesColorSelect }) => {
     const [selectedParts, setSelectedParts] = useState<IConstructorState>({
         upperPart: {
             option: '',
@@ -25,7 +29,11 @@ const Constructor = () => {
         laces: undefined,
     });
 
-    const handlePartSelection = (partType: keyof IConstructorState, selectedOption: string, imageUrl: string) => {
+    const handlePartSelection = (
+        partType: keyof IConstructorState,
+        selectedOption: string,
+        imageUrl: string
+    ) => {
         setSelectedParts((prevState) => ({
             ...prevState,
             [partType]: {
@@ -47,7 +55,7 @@ const Constructor = () => {
 
     return (
         <div>
-            <UpperPartSelector onSelect={handlePartSelection} />
+            <UpperPartSelector onSelect={handlePartSelection} onLacesColorSelect={onLacesColorSelect} />
 
             {/*<LacesPartSelector*/}
             {/*    availableOptions={['Option 1', 'Option 2', 'Option 3']}*/}
@@ -55,10 +63,7 @@ const Constructor = () => {
             {/*    onOptionSelect={(option, imageUrl) => handlePartSelection('laces', option, imageUrl)}*/}
             {/*/>*/}
 
-            <SelectedPartsDisplay
-                clearSelection={clearSelection}
-                selectedParts={selectedParts}
-            />
+            <SelectedPartsDisplay clearSelection={clearSelection} selectedParts={selectedParts} />
 
             <SaveAndOrderButton selectedParts={selectedParts} />
         </div>

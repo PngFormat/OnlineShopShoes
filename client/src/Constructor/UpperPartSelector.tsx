@@ -3,9 +3,14 @@ import React from 'react';
 interface IUpperPartSelectorProps {
     onSelect: (partType: string, selectedOption: string, imageUrl: string) => void;
     onUpperPartImageClick?: () => void;
+    onLacesColorSelect?: (color: string) => void;
 }
 
-const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({ onSelect, onUpperPartImageClick }) => {
+const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
+                                                                  onSelect,
+                                                                  onUpperPartImageClick,
+                                                                  onLacesColorSelect,
+                                                              }) => {
     const handleSelection = (selectedOption: string) => {
         const imageUrl = getUpperPartImageSrc(selectedOption);
         onSelect('upperPart', selectedOption, imageUrl);
@@ -13,7 +18,8 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({ onSelect, onUppe
 
     const getUpperPartImageSrc = (option: string) => {
         const upperPartImages: { [key: string]: string } = {
-            option1: 'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png',
+            option1:
+                'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png',
             option2: 'https://imgpng.ru/d/shoelaces_PNG28.png',
             // Add links for each upper part option
         };
@@ -22,7 +28,11 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({ onSelect, onUppe
     };
 
     const clearSelectedOption = () => {
-        onUpperPartImageClick();
+        onSelect('upperPart', '', '');
+    };
+
+    const handleLacesColorSelect = (color: string) => {
+        onLacesColorSelect?.(color);
     };
 
     return (
@@ -47,6 +57,8 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({ onSelect, onUppe
             {/* Add more buttons for other upper part options */}
 
             <button onClick={clearSelectedOption}>Очистити</button>
+
+            <input type="color" onChange={(e) => handleLacesColorSelect(e.target.value)} />
         </div>
     );
 };
