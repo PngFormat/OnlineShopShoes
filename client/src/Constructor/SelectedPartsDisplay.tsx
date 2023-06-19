@@ -1,17 +1,27 @@
 import React from 'react';
 
 interface ISelectedPartsDisplay {
-    selectedParts: any;
+    selectedParts: {
+        upperPart?: {
+            option: string;
+            imageSrc: string;
+        };
+        laces?: {
+            option: string;
+            imageSrc: string;
+        };
+        // Add more properties for other selected parts
+    };
     clearSelection?: () => void;
-    laceImageSrc?: string | undefined;
     onLacesImageClick?: () => void;
+    onUpperPartImageClick?: () => void;
 }
 
 const SelectedPartsDisplay: React.FC<ISelectedPartsDisplay> = ({
                                                                    selectedParts,
                                                                    clearSelection,
-                                                                   laceImageSrc,
                                                                    onLacesImageClick,
+                                                                   onUpperPartImageClick,
                                                                }) => {
     const handleClearSelection = () => {
         clearSelection?.();
@@ -19,6 +29,10 @@ const SelectedPartsDisplay: React.FC<ISelectedPartsDisplay> = ({
 
     const handleLacesImageClick = () => {
         onLacesImageClick?.();
+    };
+
+    const handleUpperPartImageClick = () => {
+        onUpperPartImageClick?.();
     };
 
     return (
@@ -31,19 +45,20 @@ const SelectedPartsDisplay: React.FC<ISelectedPartsDisplay> = ({
                         width={100}
                         height={100}
                         src={selectedParts.upperPart.imageSrc}
-                        alt={selectedParts.upperPart.name}
+                        alt={selectedParts.upperPart.option}
+                        onClick={handleUpperPartImageClick}
                     />
                 </div>
             )}
 
-            {laceImageSrc && (
+            {selectedParts.laces && (
                 <div>
                     <h4>Laces:</h4>
                     <img
                         width={100}
                         height={100}
-                        src={laceImageSrc}
-                        alt="Laces"
+                        src={selectedParts.laces.imageSrc}
+                        alt={selectedParts.laces.option}
                         onClick={handleLacesImageClick}
                     />
                 </div>
