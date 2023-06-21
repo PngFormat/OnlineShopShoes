@@ -3,9 +3,12 @@ import UpperPartSelector from './UpperPartSelector';
 import LacesPartSelector from './LacesPartSelector';
 import SelectedPartsDisplay from './SelectedPartsDisplay';
 import SaveAndOrderButton from './SaveAndOrderButton';
+import BottomPartSelector from "./BottomPartSelector";
 
 interface IConstructorProps {
     onLacesColorSelect: (color: string) => void;
+    onSoleColorSelect: (color: string) => void;
+    onSoleBottomColorSelect: (color: string) => void;
 }
 
 interface IConstructorState {
@@ -20,7 +23,7 @@ interface IConstructorState {
     // Add more properties for other selected parts
 }
 
-const Constructor: React.FC<IConstructorProps> = ({ onLacesColorSelect }) => {
+const Constructor: React.FC<IConstructorProps> = ({ onLacesColorSelect, onSoleColorSelect, onSoleBottomColorSelect }) => {
     const [selectedParts, setSelectedParts] = useState<IConstructorState>({
         upperPart: {
             option: '',
@@ -57,12 +60,7 @@ const Constructor: React.FC<IConstructorProps> = ({ onLacesColorSelect }) => {
         <div>
             <UpperPartSelector onSelect={handlePartSelection} onLacesColorSelect={onLacesColorSelect} />
 
-            {/*<LacesPartSelector*/}
-            {/*    availableOptions={['Option 1', 'Option 2', 'Option 3']}*/}
-            {/*    selectedOption={selectedParts.laces?.option || ''}*/}
-            {/*    onOptionSelect={(option, imageUrl) => handlePartSelection('laces', option, imageUrl)}*/}
-            {/*/>*/}
-
+            <BottomPartSelector onSoleColorSelect={onSoleColorSelect} onSoleBottomColorSelect={onSoleBottomColorSelect} />
             <SelectedPartsDisplay clearSelection={clearSelection} selectedParts={selectedParts} />
 
             <SaveAndOrderButton selectedParts={selectedParts} />

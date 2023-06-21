@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface IUpperPartSelectorProps {
-    onSelect: (partType: string, selectedOption: string, imageUrl: string) => void;
+    onSelect?: (partType: string, selectedOption: string, imageUrl: string) => void;
     onUpperPartImageClick?: () => void;
     onLacesColorSelect?: (color: string) => void;
 }
@@ -35,6 +35,7 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
         onLacesColorSelect?.(color);
     };
 
+
     return (
         <div>
             <h3>Верхня частина</h3>
@@ -57,8 +58,10 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
             {/* Add more buttons for other upper part options */}
 
             <button onClick={clearSelectedOption}>Очистити</button>
-
+            <h3>Колір шнурків</h3>
             <input type="color" onChange={(e) => handleLacesColorSelect(e.target.value)} />
+
+
         </div>
     );
 };
