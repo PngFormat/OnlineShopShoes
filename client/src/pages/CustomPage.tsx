@@ -52,7 +52,7 @@ const CustomPage = () => {
     }
 
 
-
+    const laceImage = 'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png'
     const handleLacesColorSelect = (color) => {
         setSelectedLaceColor(color);
 
@@ -95,11 +95,22 @@ const CustomPage = () => {
                     left: '185px',
                     width: '440px',
                     height: '70px',
-                    backgroundColor: selectedSoleColor,
-                    clipPath: 'polygon(10% 7% , 100% 10% , 75% 70% , 10% 75%,10% 0%,90% 30%)', // Define your custom shape using coordinates
-
+                    clipPath: 'polygon(10% 7%, 100% 10%, 75% 70%, 10% 75%, 10% 0%, 90% 30%)',
                 }}
-            ></div>
+            >
+                <div
+                    className={styles.laceImage}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        // backgroundImage: `url('https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png')`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
+                        clipPath: 'polygon(10% 7%, 100% 10%, 75% 70%, 10% 75%, 10% 0%, 90% 30%)',
+                        backgroundColor: selectedSoleColor,
+                    }}
+                ></div>
+            </div>
 
             <div
                 style={{
@@ -112,7 +123,114 @@ const CustomPage = () => {
                     clipPath: 'polygon(10% 50% , 100% 10% , 90% 70% , 45% 75%,10% 0%,50% 30%)', // Define your custom shape using coordinates
 
                 }}
-            ></div>
+            >
+            </div>
+
+
+
+            {/*Задник*/}
+            <div
+                className={styles.laces}
+                style={{
+                    position: 'absolute',
+                    top: '280px',
+                    left: '30px',
+                    width: '140px',
+                    height: '100px',
+                    clipPath: 'polygon(10% 7%, 100% 10%, 75% 70%, 10% 75%, 10% 0%)',
+                }}
+            >
+                <div
+                    className={styles.laceImage}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        // backgroundImage: `url('https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png')`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
+                        clipPath: 'polygon(90% 100%, 20% 100%, 50% 80%, 0% 50%, 30% 0%, 80% 50%)',
+                        backgroundColor: selectedSoleColor,
+                    }}
+                ></div>
+            </div>
+
+
+            <div
+                className={styles.laces}
+                style={{
+                    position: 'absolute',
+                    top: '355px',
+                    left: '90px',
+                    width: '140px',
+                    height: '80px',
+                    clipPath: 'polygon(10% 7%, 100% 10%, 75% 70%, 10% 75%, 10% 0%)',
+                }}
+            >
+                <div
+                    className={styles.laceImage}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        // backgroundImage: `url('https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png')`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
+                        clipPath: 'polygon(90% 100%, 20% 100%, 50% 80%, 0% 50%, 30% 0%, 80% 50%)',
+                        backgroundColor: selectedSoleBottomColor,
+                    }}
+                ></div>
+            </div>
+
+            <div
+                className={styles.laces}
+                style={{
+                    position: 'absolute',
+                    top: '360px',
+                    left: '180px',
+                    width: '170px',
+                    height: '80px',
+                    clipPath: 'polygon(10% 7%, 100% 10%, 75% 70%, 10% 75%, 10% 0%)',
+                }}
+            >
+                <div
+                    className={styles.laceImage}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        // backgroundImage: `url('https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png')`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
+                        clipPath: 'polygon(90% 100%, 20% 100%, 50% 80%, 0% 50%, 30% 0%, 80% 50%)',
+                        backgroundColor: selectedSoleBottomColor,
+                    }}
+                ></div>
+            </div>
+
+
+            <div
+                className={styles.laces}
+                style={{
+                    position: 'absolute',
+                    top: '365px',
+                    left: '280px',
+                    width: '190px',
+                    height: '80px',
+                    clipPath: 'polygon(10% 7%, 100% 10%, 75% 70%, 10% 75%, 10% 0%)',
+                }}
+            >
+                <div
+                    className={styles.laceImage}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        // backgroundImage: `url('https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png')`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
+                        clipPath: 'polygon(90% 100%, 20% 100%, 50% 80%, 0% 50%, 30% 0%, 80% 50%)',
+                        backgroundColor: selectedSoleBottomColor,
+                    }}
+                ></div>
+            </div>
+
             <div className={styles.mainBlock}>
                 <Constructor
                     onSoleColorSelect={handleSoleColorSelect}

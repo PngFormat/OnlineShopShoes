@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CustomShape = ({ top, left, width, height, color, shapeCoordinates }) => {
+const CustomShape = ({ top, left, width, height, color, shapeCoordinates}) => {
     return (
         <div
             style={{
