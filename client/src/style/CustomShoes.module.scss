@@ -6,3 +6,53 @@
   height: 100%;
   background-color: #85b6ec;
 }
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+//Задник
+.back {
+  height: 350px;
+  width:700px;
+  content: "";
+  position: absolute;
+  top: 145px;
+  left: 370px;
+  bottom: 0;
+  z-index: 0;
+  -webkit-mask-image: url("../img/BackShoes.png");
+  mask-image: url("../img/BackShoes.png");
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}
+
+.bottom {
+  height: 370px;
+  width:750px;
+  content: "";
+  position: absolute;
+  top: 248px;
+  left: 557px;
+  bottom: 0;
+  z-index: 0;
+  -webkit-mask-image: url("../img/SoleBottom.png");
+  mask-image: url("../img/SoleBottom.png");
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}
+.sole {
+  height: 370px;
+  width:750px;
+  content: "";
+  position: absolute;
+  top: 159px;
+  left: 580px;
+  bottom: 0;
+  z-index: 0;
+  -webkit-mask-image: url("../img/Sole.png");
+  mask-image: url("../img/Sole.png");
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}
