@@ -3,13 +3,20 @@ import React from 'react';
 interface IUpperPartSelectorProps {
     onSelect?: (partType: string, selectedOption: string, imageUrl: string) => void;
     onUpperPartImageClick?: () => void;
+    onBackColorSelect?: (color: string) => void;
     onLacesColorSelect?: (color: string) => void;
+    onFrontColorSelect?: (color: string) => void;
+    onPieceColorSelect?: (color: string) => void;
 }
 
 const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
                                                                   onSelect,
                                                                   onUpperPartImageClick,
+                                                                  onBackColorSelect,
                                                                   onLacesColorSelect,
+                                                                  onFrontColorSelect,
+                                                                  onPieceColorSelect
+
                                                               }) => {
     const handleSelection = (selectedOption: string) => {
         const imageUrl = getUpperPartImageSrc(selectedOption);
@@ -31,10 +38,20 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
         onSelect('upperPart', '', '');
     };
 
+    const handleBackColorSelect = (color: string) => {
+        onBackColorSelect?.(color);
+    };
     const handleLacesColorSelect = (color: string) => {
         onLacesColorSelect?.(color);
     };
 
+    const handleFrontColorSelect = (color: string) => {
+        onFrontColorSelect?.(color);
+    };
+
+    const handlePieceColorSelect = (color: string) => {
+        onPieceColorSelect?.(color);
+    };
 
     return (
         <div>
@@ -60,6 +77,15 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
             <button onClick={clearSelectedOption}>Очистити</button>
             <h3>Колір шнурків</h3>
             <input type="color" onChange={(e) => handleLacesColorSelect(e.target.value)} />
+
+            <h3>Колір задника</h3>
+            <input type="color" onChange={(e) => handleBackColorSelect(e.target.value)} />
+
+            <h3>Бік кросівка</h3>
+            <input type="color" onChange={(e) => handleFrontColorSelect(e.target.value)} />
+
+            <h3>Полоса</h3>
+            <input type="color" onChange={(e) => handlePieceColorSelect(e.target.value)} />
 
 
         </div>

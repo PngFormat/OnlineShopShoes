@@ -1,19 +1,19 @@
-import React from 'react';
+import React, {FC} from 'react';
 
-const CustomShape = ({ top, left, width, height, color, shapeCoordinates}) => {
+interface ICustomShape {
+    className: string;
+    backgroundColor: string;
+    style?: {};
+}
+
+
+const CustomShape: React.FC<ICustomShape> = ({className, backgroundColor,style}) => {
     return (
-        <div
-            style={{
-                position: 'absolute',
-                top,
-                left,
-                width,
-                height,
-                backgroundColor: color,
-                clipPath: shapeCoordinates,
-            }}
-        ></div>
-    );
-};
+        <div className={className} style={{ ...style, backgroundColor }}>
+            <div className="back"></div>
+            <div className="bottom"></div>
+            <div className="sole"></div>
+        </div>
+)};
 
 export default CustomShape;

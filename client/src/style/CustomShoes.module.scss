@@ -56,3 +56,73 @@
   mask-repeat: no-repeat;
   mask-size: 100% 100%;
 }
+
+
+.sideBottom {
+  height: 500px;
+  width:950px;
+  content: "";
+  position: absolute;
+  top: 102px;
+  left: 480px;
+  bottom: 0;
+  z-index: 0;
+  -webkit-mask-image: url("../img/SideBottom.png");
+  mask-image: url("../img/SideBottom.png");
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}
+
+.shape {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  z-index: 0;
+  mask-image: url("../img/Laces.png");
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}
+
+.front {
+  height: 500px;
+  width:950px;
+  content: "";
+  position: absolute;
+  top: 105px;
+  left: 480px;
+  bottom: 0;
+  z-index: 0;
+  -webkit-mask-image: url("../img/Front.png");
+  mask-image: url("../img/Front.png");
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}
+.piece {
+  height: 500px;
+  width:950px;
+  content: "";
+  position: absolute;
+  top: 105px;
+  left: 480px;
+  bottom: 0;
+  z-index: 0;
+  -webkit-mask-image: url("../img/piece.png");
+  mask-image: url("../img/piece.png");
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}
+
+.pieceBack {
+  height: 500px;
+  width:950px;
+  content: "";
+  position: absolute;
+  top: 105px;
+  left: 480px;
+  bottom: 0;
+  z-index: 0;
+  -webkit-mask-image: url("../img/piece.png");
+  mask-image: url("../img/piece.png");
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}

@@ -8,6 +8,12 @@ const CustomPage = () => {
     const [selectedLaceColor, setSelectedLaceColor] = useState('');
     const [selectedSoleColor, setSelectedSoleColor] = useState('');
     const [selectedSoleBottomColor, setSelectedSoleBottomColor] = useState('');
+    const [selectedSideBottomColor, setSelectedSideBottomColor] = useState('');
+    const [selectedBackColor, setSelectedBackColor] = useState('');
+    const [selectedFrontColor, setSelectedFrontColor] = useState('');
+    const [selectedPieceColor, setSelectedPieceColor] = useState('');
+    const [selectedBackFrontColor, setBackFrontColor] = useState('');
+
 
     const handleLacesColorSelect = (color) => {
         setSelectedLaceColor(color);
@@ -22,8 +28,26 @@ const CustomPage = () => {
         setSelectedSoleColor(colorSoleBottom);
     };
 
+    const handleSideBottomColorSelect = (colorSideBottom) => {
+        setSelectedSideBottomColor(colorSideBottom);
+    };
 
-    console.log(selectedSoleBottomColor)
+    const handleBackColorSelect = (colorBack) => {
+        setSelectedBackColor(colorBack);
+    };
+
+    const handleFrontColorSelect = (colorBack) => {
+        setSelectedFrontColor(colorBack);
+    };
+
+    const handlePieceColorSelect = (colorPiece) => {
+        setSelectedPieceColor(colorPiece);
+    };
+    const handleBackFrontColorSelect = (colorPiece) => {
+        setBackFrontColor(colorPiece);
+    };
+
+
     return (
         <div>
             <h1>Кастомізація взуття</h1>
@@ -37,26 +61,59 @@ const CustomPage = () => {
                 />
             </div>
 
-            <div
-                className={styles.back}
-                style={{ backgroundColor: selectedLaceColor }}
-            ></div>
+            <CustomShape
+                className={styles.shape}
+                style={{height: 500, width:970,top: 107,left: 465,  WebkitMaskImage: 'url("../img/Laces.png")'}}
+                backgroundColor={selectedLaceColor}
 
-            <div
+            />
+
+            <CustomShape
+                className={styles.back}
+                backgroundColor={selectedBackColor}
+            />
+
+            <CustomShape
                 className={styles.bottom}
-                style={{ backgroundColor: selectedSoleColor }}
-            ></div>
-            <div
+                backgroundColor={selectedSoleColor}
+            />
+            <CustomShape
                 className={styles.sole}
-                style={{ backgroundColor: selectedSoleBottomColor }}
-            ></div>
+                backgroundColor={selectedSoleBottomColor}
+            />
+
+            <CustomShape
+                className={styles.sideBottom}
+                backgroundColor={selectedSideBottomColor}
+            />
+
+            <CustomShape
+                className={styles.front}
+                backgroundColor={selectedFrontColor}
+            />
+
+            <CustomShape
+                className={styles.piece}
+                backgroundColor={selectedPieceColor}
+            />
+
+            <CustomShape
+                className={styles.pieceBack}
+                backgroundColor={selectedPieceColor}
+            />
 
 
             <div className={styles.mainBlock}>
                 <Constructor
                     onSoleColorSelect={handleSoleColorSelect}
                     onSoleBottomColorSelect={handleSoleBottomColorSelect}
-                    onLacesColorSelect={handleLacesColorSelect} />
+                    onSideBottomColorSelect={handleSideBottomColorSelect}
+                    onLacesColorSelect={handleLacesColorSelect}
+                    onBackColorSelect={handleBackColorSelect}
+                    onFrontColorSelect={handleFrontColorSelect}
+                    onPieceColorSelect={handlePieceColorSelect}
+                    onBackFrontColorSelect={handleBackFrontColorSelect}
+                />
             </div>
         </div>
     );

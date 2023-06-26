@@ -9,6 +9,12 @@ interface IConstructorProps {
     onLacesColorSelect: (color: string) => void;
     onSoleColorSelect: (color: string) => void;
     onSoleBottomColorSelect: (color: string) => void;
+    onSideBottomColorSelect: (color: string) => void;
+    onBackColorSelect: (color: string) => void;
+    onFrontColorSelect: (color: string) => void;
+    onPieceColorSelect: (color: string) => void;
+    onBackFrontColorSelect: (color: string) => void;
+
 }
 
 interface IConstructorState {
@@ -23,7 +29,17 @@ interface IConstructorState {
     // Add more properties for other selected parts
 }
 
-const Constructor: React.FC<IConstructorProps> = ({ onLacesColorSelect, onSoleColorSelect, onSoleBottomColorSelect }) => {
+const Constructor: React.FC<IConstructorProps> = ({ onLacesColorSelect,
+                                                      onSoleColorSelect,
+                                                      onSoleBottomColorSelect,
+                                                      onSideBottomColorSelect,
+                                                        onBackColorSelect,
+                                                        onFrontColorSelect,
+                                                      onPieceColorSelect,
+                                                        onBackFrontColorSelect
+}) => {
+
+
     const [selectedParts, setSelectedParts] = useState<IConstructorState>({
         upperPart: {
             option: '',
@@ -58,10 +74,25 @@ const Constructor: React.FC<IConstructorProps> = ({ onLacesColorSelect, onSoleCo
 
     return (
         <div>
-            <UpperPartSelector onSelect={handlePartSelection} onLacesColorSelect={onLacesColorSelect} />
+            <UpperPartSelector
+                onSelect={handlePartSelection}
+                onBackColorSelect={onBackColorSelect}
+                onLacesColorSelect={onLacesColorSelect}
+                onFrontColorSelect={onFrontColorSelect}
+                onPieceColorSelect={onPieceColorSelect}
 
-            <BottomPartSelector onSoleColorSelect={onSoleColorSelect} onSoleBottomColorSelect={onSoleBottomColorSelect} />
-            <SelectedPartsDisplay clearSelection={clearSelection} selectedParts={selectedParts} />
+            />
+
+            <BottomPartSelector
+                onSoleColorSelect={onSoleColorSelect}
+                onSoleBottomColorSelect={onSoleBottomColorSelect}
+                onSideBottomColorSelect={onSideBottomColorSelect}
+                onBackFrontColorSelect={onBackFrontColorSelect}
+            />
+            <SelectedPartsDisplay
+                clearSelection={clearSelection}
+                selectedParts={selectedParts}
+            />
 
             <SaveAndOrderButton selectedParts={selectedParts} />
         </div>
