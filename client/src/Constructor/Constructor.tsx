@@ -14,6 +14,7 @@ interface IConstructorProps {
     onFrontColorSelect: (color: string) => void;
     onPieceColorSelect: (color: string) => void;
     onBackFrontColorSelect: (color: string) => void;
+    onImageUploadLaces?: (color: string) => void;
 
 }
 
@@ -36,10 +37,11 @@ const Constructor: React.FC<IConstructorProps> = ({ onLacesColorSelect,
                                                         onBackColorSelect,
                                                         onFrontColorSelect,
                                                       onPieceColorSelect,
-                                                        onBackFrontColorSelect
+                                                        onBackFrontColorSelect,
+                                                      onImageUploadLaces
 }) => {
 
-
+    const [selectedImage, setSelectedImage] = useState(null);
     const [selectedParts, setSelectedParts] = useState<IConstructorState>({
         upperPart: {
             option: '',
@@ -72,6 +74,11 @@ const Constructor: React.FC<IConstructorProps> = ({ onLacesColorSelect,
         });
     };
 
+    const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+        setSelectedImage(file);
+    };
+
     return (
         <div>
             <UpperPartSelector
@@ -80,6 +87,7 @@ const Constructor: React.FC<IConstructorProps> = ({ onLacesColorSelect,
                 onLacesColorSelect={onLacesColorSelect}
                 onFrontColorSelect={onFrontColorSelect}
                 onPieceColorSelect={onPieceColorSelect}
+                onImageUploadLaces={handleImageUpload}
 
             />
 

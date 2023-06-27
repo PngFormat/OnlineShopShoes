@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from '../style/CustomShoes.module.scss';
 import Constructor from "../Constructor/Constructor";
 import CustomShape from "../Constructor/Components/CustomShape";
@@ -13,6 +13,22 @@ const CustomPage = () => {
     const [selectedFrontColor, setSelectedFrontColor] = useState('');
     const [selectedPieceColor, setSelectedPieceColor] = useState('');
     const [selectedBackFrontColor, setBackFrontColor] = useState('');
+
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const [selectedImageURL, setSelectedImageURL] = useState<string>('');
+
+
+    useEffect(() => {
+        if (selectedImageURL) {
+            URL.revokeObjectURL(selectedImageURL);
+        }
+    }, [selectedImageURL]);
+
+    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files[0];
+        setSelectedImage(file);
+        setSelectedImageURL(URL.createObjectURL(file));
+    };
 
 
     const handleLacesColorSelect = (color) => {
@@ -47,7 +63,11 @@ const CustomPage = () => {
         setBackFrontColor(colorPiece);
     };
 
-
+    console.log(selectedImageURL)
+    const handleImageUpload1 = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        setSelectedImage(file);
+    };
     return (
         <div>
             <h1>Кастомізація взуття</h1>
@@ -63,9 +83,14 @@ const CustomPage = () => {
 
             <CustomShape
                 className={styles.shape}
-                style={{height: 500, width:970,top: 107,left: 465,  WebkitMaskImage: 'url("../img/Laces.png")'}}
+                style={{
+                    height: 500,
+                    width: 970,
+                    top: 107,
+                    left: 465,
+                    backgroundImage: selectedImageURL ? `url(${selectedImageURL})` : '',
+                }}
                 backgroundColor={selectedLaceColor}
-
             />
 
             <CustomShape
@@ -99,10 +124,10 @@ const CustomPage = () => {
 
             <CustomShape
                 className={styles.pieceBack}
-                backgroundColor={selectedPieceColor}
+                backgroundColor={selectedBackFrontColor}
             />
 
-
+            {/*<input type="file" accept="image/*" onChange={handleImageUpload} />*/}
             <div className={styles.mainBlock}>
                 <Constructor
                     onSoleColorSelect={handleSoleColorSelect}
@@ -113,8 +138,21 @@ const CustomPage = () => {
                     onFrontColorSelect={handleFrontColorSelect}
                     onPieceColorSelect={handlePieceColorSelect}
                     onBackFrontColorSelect={handleBackFrontColorSelect}
+
                 />
+                <div>
+                    {selectedImage && (
+                        <img
+                            src={URL.createObjectURL(selectedImage)}
+                            alt="Selected Image"
+                        />
+                    )}
+                </div>
+
+
             </div>
+
+            <input type="file" accept="image/*" onChange={handleImageUpload} />
         </div>
     );
 };

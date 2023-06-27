@@ -24,12 +24,7 @@ const SelectedPartsDisplay: React.FC<ISelectedPartsDisplay> = ({
                                                                    onUpperPartImageClick,
                                                                }) => {
 
-    const [selectedImage, setSelectedImage] = useState(null);
 
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        setSelectedImage(URL.createObjectURL(file));
-    };
 
     const handleClearSelection = () => {
         clearSelection?.();
@@ -72,10 +67,6 @@ const SelectedPartsDisplay: React.FC<ISelectedPartsDisplay> = ({
                 </div>
             )}
 
-            <div>
-                <input type="file" accept="image/*" onChange={handleImageChange} />
-                {selectedImage && <img src={selectedImage} alt="Selected" />}
-            </div>
 
             {/* Add more conditional rendering for other selected parts */}
             <button onClick={handleClearSelection}>Видалити обране</button>

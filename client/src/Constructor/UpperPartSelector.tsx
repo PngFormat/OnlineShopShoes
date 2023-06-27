@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,useRef} from 'react';
 
 interface IUpperPartSelectorProps {
     onSelect?: (partType: string, selectedOption: string, imageUrl: string) => void;
@@ -7,6 +7,7 @@ interface IUpperPartSelectorProps {
     onLacesColorSelect?: (color: string) => void;
     onFrontColorSelect?: (color: string) => void;
     onPieceColorSelect?: (color: string) => void;
+    onImageUploadLaces?: (event: any) => void;
 }
 
 const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
@@ -18,12 +19,24 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
                                                                   onPieceColorSelect
 
                                                               }) => {
+
+    const [selectedImage, setSelectedImage] = useState(null);
     const handleSelection = (selectedOption: string) => {
-        const imageUrl = getUpperPartImageSrc(selectedOption);
-        onSelect('upperPart', selectedOption, imageUrl);
+        if (selectedOption === 'custom') {
+            onUpperPartImageClick?.();
+        } else {
+            const imageUrl = getUpperPartImageSrc(selectedOption);
+            onSelect('upperPart', selectedOption, imageUrl);
+        }
     };
 
+
     const getUpperPartImageSrc = (option: string) => {
+        if (option === 'custom') {
+            // Return the URL of the custom uploaded image
+            return selectedImage ? URL.createObjectURL(selectedImage) : '';
+        }
+
         const upperPartImages: { [key: string]: string } = {
             option1:
                 'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png',
@@ -52,6 +65,21 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
     const handlePieceColorSelect = (color: string) => {
         onPieceColorSelect?.(color);
     };
+
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleImageUpload = () => {
+        const file = fileInputRef.current?.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const imageUrl = reader.result as string;
+                onSelect?.('custom', 'Custom Image', imageUrl);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
 
     return (
         <div>
@@ -87,7 +115,9 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
             <h3>Полоса</h3>
             <input type="color" onChange={(e) => handlePieceColorSelect(e.target.value)} />
 
-
+            <button onClick={() => handleSelection('custom')}>
+                Upload Custom Image
+            </button>
         </div>
     );
 };
