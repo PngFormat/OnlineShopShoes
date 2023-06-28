@@ -115,9 +115,9 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
             <h3>Полоса</h3>
             <input type="color" onChange={(e) => handlePieceColorSelect(e.target.value)} />
 
-            <button onClick={() => handleSelection('custom')}>
-                Upload Custom Image
-            </button>
+            {/*<button onClick={() => handleSelection('custom')}>*/}
+            {/*    Upload Custom Image*/}
+            {/*</button>*/}
         </div>
     );
 };

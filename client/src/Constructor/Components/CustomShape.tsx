@@ -4,6 +4,7 @@ interface ICustomShape {
     className: string;
     backgroundColor: string;
     style?: {};
+    backgroundImage?: string;
 }
 
 

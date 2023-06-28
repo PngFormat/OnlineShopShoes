@@ -17,18 +17,30 @@ const CustomPage = () => {
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const [selectedImageURL, setSelectedImageURL] = useState<string>('');
 
-
+    console.log(selectedImageURL)
     useEffect(() => {
         if (selectedImageURL) {
             URL.revokeObjectURL(selectedImageURL);
         }
     }, [selectedImageURL]);
 
+    // const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     const file = event.target.files[0];
+    //     setSelectedImage(file);
+    //     setSelectedImageURL(URL.createObjectURL(file));
+    // };
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files[0];
+        const file = event.target.files?.[0];
         setSelectedImage(file);
-        setSelectedImageURL(URL.createObjectURL(file));
+
+        if (file) {
+            const imageURL = URL.createObjectURL(file);
+            setSelectedImageURL(imageURL);
+        } else {
+            setSelectedImageURL('');
+        }
     };
+
 
 
     const handleLacesColorSelect = (color) => {
@@ -64,10 +76,7 @@ const CustomPage = () => {
     };
 
     console.log(selectedImageURL)
-    const handleImageUpload1 = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        setSelectedImage(file);
-    };
+
     return (
         <div>
             <h1>Кастомізація взуття</h1>
@@ -88,10 +97,31 @@ const CustomPage = () => {
                     width: 970,
                     top: 107,
                     left: 465,
-                    backgroundImage: selectedImageURL ? `url(${selectedImageURL})` : '',
+                    // backgroundImage: selectedImageURL ? `url(${selectedImageURL})` : '',
+                    backgroundImage: `url("../img/Dots.png")`,
                 }}
                 backgroundColor={selectedLaceColor}
             />
+
+            <CustomShape
+                className={styles.shape}
+                style={{
+                    height: 500,
+                    width: 970,
+                    top: 107,
+                    left: 465,
+                    backgroundImage: `url("../img/Dots.png")`,
+                    maskImage: `url("../img/Sole.png")`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: '100% 100%',
+
+                }}
+                backgroundColor={selectedLaceColor}
+            />
+
+
+
+
 
             <CustomShape
                 className={styles.back}
@@ -105,6 +135,9 @@ const CustomPage = () => {
             <CustomShape
                 className={styles.sole}
                 backgroundColor={selectedSoleBottomColor}
+                style={{
+                    backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : '',
+                }}
             />
 
             <CustomShape
