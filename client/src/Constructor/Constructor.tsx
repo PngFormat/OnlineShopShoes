@@ -14,8 +14,7 @@ interface IConstructorProps {
     onFrontColorSelect: (color: string) => void;
     onPieceColorSelect: (color: string) => void;
     onBackFrontColorSelect: (color: string) => void;
-    onImageUploadLaces?: (color: string) => void;
-
+    onImageUploadLaces?: (event: any) => void;
 }
 
 interface IConstructorState {
@@ -30,24 +29,24 @@ interface IConstructorState {
     // Add more properties for other selected parts
 }
 
-const Constructor: React.FC<IConstructorProps> = ({ onLacesColorSelect,
+const Constructor: React.FC<IConstructorProps> = ({
+                                                      onLacesColorSelect,
                                                       onSoleColorSelect,
                                                       onSoleBottomColorSelect,
                                                       onSideBottomColorSelect,
-                                                        onBackColorSelect,
-                                                        onFrontColorSelect,
+                                                      onBackColorSelect,
+                                                      onFrontColorSelect,
                                                       onPieceColorSelect,
-                                                        onBackFrontColorSelect,
+                                                      onBackFrontColorSelect,
                                                       onImageUploadLaces
-}) => {
-
-    const [selectedImage, setSelectedImage] = useState(null);
+                                                  }) => {
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const [selectedParts, setSelectedParts] = useState<IConstructorState>({
         upperPart: {
             option: '',
-            imageSrc: '',
+            imageSrc: ''
         },
-        laces: undefined,
+        laces: undefined
     });
 
     const handlePartSelection = (
@@ -59,8 +58,8 @@ const Constructor: React.FC<IConstructorProps> = ({ onLacesColorSelect,
             ...prevState,
             [partType]: {
                 option: selectedOption,
-                imageSrc: imageUrl,
-            },
+                imageSrc: imageUrl
+            }
         }));
     };
 
@@ -68,15 +67,16 @@ const Constructor: React.FC<IConstructorProps> = ({ onLacesColorSelect,
         setSelectedParts({
             upperPart: {
                 option: '',
-                imageSrc: '',
+                imageSrc: ''
             },
-            laces: undefined,
+            laces: undefined
         });
     };
 
-    const handleImageUpload = (event) => {
-        const file = event.target.files[0];
+    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
         setSelectedImage(file);
+        onImageUploadLaces?.(file);
     };
 
     return (
@@ -87,14 +87,12 @@ const Constructor: React.FC<IConstructorProps> = ({ onLacesColorSelect,
                 onLacesColorSelect={onLacesColorSelect}
                 onFrontColorSelect={onFrontColorSelect}
                 onPieceColorSelect={onPieceColorSelect}
-                onImageUploadLaces={handleImageUpload}
 
             />
 
             <BottomPartSelector
                 onSoleColorSelect={onSoleColorSelect}
-                onSoleBottomColorSelect={onSoleBottomColorSelect}
-                onSideBottomColorSelect={onSideBottomColorSelect}
+                onSoleBottomColorSelect={onSoleBottomColorSelect} // Corrected prop name
                 onBackFrontColorSelect={onBackFrontColorSelect}
             />
             <SelectedPartsDisplay

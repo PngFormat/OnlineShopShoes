@@ -80,7 +80,7 @@ const CustomPage = () => {
     return (
         <div>
             <h1>Кастомізація взуття</h1>
-            <div className={styles.imageContainer} style={{ position: 'relative' }}>
+            <div className={styles.imageContainer} style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }}>
                 <img
                     width={650}
                     height={400}

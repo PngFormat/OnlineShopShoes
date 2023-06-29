@@ -1,4 +1,4 @@
-import React, {useState,useRef} from 'react';
+import React, { useState, useRef } from 'react';
 
 interface IUpperPartSelectorProps {
     onSelect?: (partType: string, selectedOption: string, imageUrl: string) => void;
@@ -7,7 +7,6 @@ interface IUpperPartSelectorProps {
     onLacesColorSelect?: (color: string) => void;
     onFrontColorSelect?: (color: string) => void;
     onPieceColorSelect?: (color: string) => void;
-    onImageUploadLaces?: (event: any) => void;
 }
 
 const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
@@ -17,23 +16,21 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
                                                                   onLacesColorSelect,
                                                                   onFrontColorSelect,
                                                                   onPieceColorSelect
-
                                                               }) => {
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const [selectedImage, setSelectedImage] = useState(null);
     const handleSelection = (selectedOption: string) => {
         if (selectedOption === 'custom') {
             onUpperPartImageClick?.();
         } else {
             const imageUrl = getUpperPartImageSrc(selectedOption);
-            onSelect('upperPart', selectedOption, imageUrl);
+            onSelect?.('upperPart', selectedOption, imageUrl);
         }
     };
 
-
     const getUpperPartImageSrc = (option: string) => {
         if (option === 'custom') {
-            // Return the URL of the custom uploaded image
             return selectedImage ? URL.createObjectURL(selectedImage) : '';
         }
 
@@ -48,12 +45,13 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
     };
 
     const clearSelectedOption = () => {
-        onSelect('upperPart', '', '');
+        onSelect?.('upperPart', '', '');
     };
 
     const handleBackColorSelect = (color: string) => {
         onBackColorSelect?.(color);
     };
+
     const handleLacesColorSelect = (color: string) => {
         onLacesColorSelect?.(color);
     };
@@ -66,11 +64,10 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
         onPieceColorSelect?.(color);
     };
 
-    const fileInputRef = useRef<HTMLInputElement>(null);
-
     const handleImageUpload = () => {
-        const file = fileInputRef.current?.files[0];
+        const file = fileInputRef.current?.files?.[0];
         if (file) {
+            setSelectedImage(file);
             const reader = new FileReader();
             reader.onloadend = () => {
                 const imageUrl = reader.result as string;
@@ -79,7 +76,6 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
             reader.readAsDataURL(file);
         }
     };
-
 
     return (
         <div>
@@ -105,19 +101,29 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
             <button onClick={clearSelectedOption}>Очистити</button>
             <h3>Колір шнурків</h3>
             <input type="color" onChange={(e) => handleLacesColorSelect(e.target.value)} />
-
+            <h3>Завантажити власний дизайн</h3>
+            <input type="file" accept="image/*" onChange={handleImageUpload} ref={fileInputRef} />
+            <div>
+                <hr/>
+            </div>
             <h3>Колір задника</h3>
             <input type="color" onChange={(e) => handleBackColorSelect(e.target.value)} />
-
+            <h3>Завантажити власний дизайн</h3>
+            <input type="file" accept="image/*" onChange={handleImageUpload} ref={fileInputRef} />
+            <div>
+                <hr/>
+            </div>
             <h3>Бік кросівка</h3>
             <input type="color" onChange={(e) => handleFrontColorSelect(e.target.value)} />
-
+            <h3>Завантажити власний дизайн</h3>
+            <input type="file" accept="image/*" onChange={handleImageUpload} ref={fileInputRef} />
+            <div>
+                <hr/>
+            </div>
             <h3>Полоса</h3>
             <input type="color" onChange={(e) => handlePieceColorSelect(e.target.value)} />
-
-            {/*<button onClick={() => handleSelection('custom')}>*/}
-            {/*    Upload Custom Image*/}
-            {/*</button>*/}
+            <h3>Завантажити власний дизайн</h3>
+            <input type="file" accept="image/*" onChange={handleImageUpload} ref={fileInputRef} />
         </div>
     );
 };
