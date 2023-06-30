@@ -1,4 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, {useRef, useState} from 'react';
+import styles from "../style/CustomShoes.module.scss";
+import CustomShape from "./Components/CustomShape";
 
 interface IBottomPartSelectorProps {
     onSelect?: (partType: string, selectedOption: string, imageUrl: string) => void;
@@ -6,6 +8,7 @@ interface IBottomPartSelectorProps {
     onSoleBottomColorSelect?: (color: string) => void;
     onSideColorSelect?: (color: string) => void;
     onBackFrontColorSelect?: (color: string) => void;
+    onImageURLSelect?:(color: string) => void;
 }
 
 const BottomPartSelector: React.FC<IBottomPartSelectorProps> = ({
@@ -14,8 +17,11 @@ const BottomPartSelector: React.FC<IBottomPartSelectorProps> = ({
                                                                     onSoleBottomColorSelect,
                                                                     onSideColorSelect,
                                                                     onBackFrontColorSelect,
+                                                                    onImageURLSelect
                                                                 }) => {
     const fileInputRefs = useRef<HTMLInputElement[]>([]);
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const [selectedImageURL, setSelectedImageURL] = useState<string>('');
 
     const handleSoleColorSelect = (color: string) => {
         onSoleColorSelect?.(color);
@@ -33,17 +39,20 @@ const BottomPartSelector: React.FC<IBottomPartSelectorProps> = ({
         onBackFrontColorSelect?.(color);
     };
 
-    const handleImageUpload = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+
+
+    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
+        setSelectedImage(file);
+
         if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const imageUrl = reader.result as string;
-                onSelect?.('custom', 'Custom Image', imageUrl);
-            };
-            reader.readAsDataURL(file);
+            const imageURL = URL.createObjectURL(file);
+            setSelectedImageURL(imageURL);
+        } else {
+            setSelectedImageURL('');
         }
     };
+    console.log(onSelect)
 
     return (
         <div>
@@ -53,7 +62,7 @@ const BottomPartSelector: React.FC<IBottomPartSelectorProps> = ({
             <input
                 type="file"
                 accept="image/*"
-                onChange={handleImageUpload(0)}
+                onChange={handleImageUpload}
                 ref={(ref) => (fileInputRefs.current[0] = ref)}
             />
             <div>
@@ -65,7 +74,7 @@ const BottomPartSelector: React.FC<IBottomPartSelectorProps> = ({
             <input
                 type="file"
                 accept="image/*"
-                onChange={handleImageUpload(1)}
+                onChange={handleImageUpload}
                 ref={(ref) => (fileInputRefs.current[1] = ref)}
             />
             <div>
@@ -77,9 +86,10 @@ const BottomPartSelector: React.FC<IBottomPartSelectorProps> = ({
             <input
                 type="file"
                 accept="image/*"
-                onChange={handleImageUpload(2)}
+                onChange={handleImageUpload}
                 ref={(ref) => (fileInputRefs.current[2] = ref)}
             />
+
             <div>
                 <hr/>
             </div>
@@ -89,8 +99,20 @@ const BottomPartSelector: React.FC<IBottomPartSelectorProps> = ({
             <input
                 type="file"
                 accept="image/*"
-                onChange={handleImageUpload(3)}
+                onChange={handleImageUpload}
                 ref={(ref) => (fileInputRefs.current[3] = ref)}
+            />
+            <div>
+                {selectedImage && <img src={URL.createObjectURL(selectedImage)} alt="Selected Image" />}
+            </div>
+            <CustomShape
+                className={styles.pieceBack}
+                backgroundImage={selectedImage ? URL.createObjectURL(selectedImage) : undefined}
+                style={{
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                }}
             />
         </div>
     );

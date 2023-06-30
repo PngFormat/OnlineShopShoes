@@ -124,6 +124,9 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
             <input type="color" onChange={(e) => handlePieceColorSelect(e.target.value)} />
             <h3>Завантажити власний дизайн</h3>
             <input type="file" accept="image/*" onChange={handleImageUpload} ref={fileInputRef} />
+            <div>
+                <hr/>
+            </div>
         </div>
     );
 };

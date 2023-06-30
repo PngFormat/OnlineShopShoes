@@ -21,26 +21,27 @@
   height: 350px;
   width:700px;
   content: "";
-  position: absolute;
-  top: 145px;
-  left: 370px;
   bottom: 0;
   z-index: 0;
   -webkit-mask-image: url("../img/BackShoes.png");
   mask-image: url("../img/BackShoes.png");
   mask-repeat: no-repeat;
   mask-size: 100% 100%;
+  position: fixed;
+  top: 83px;
+  left: 593px;
 }
 
 .bottom {
   height: 370px;
   width:750px;
   content: "";
-  position: absolute;
-  top: 248px;
-  left: 557px;
+  position: fixed;
+  top: 186px;
+  left: 780px;
   bottom: 0;
   z-index: 0;
+
   -webkit-mask-image: url("../img/SoleBottom.png");
   mask-image: url("../img/SoleBottom.png");
   mask-repeat: no-repeat;
@@ -50,13 +51,14 @@
   height: 370px;
   width:750px;
   content: "";
-  position: absolute;
-  top: 159px;
-  left: 580px;
+  position: fixed;
+  top: 97px;
+  left: 800px;
   bottom: 0;
   z-index: 0;
   -webkit-mask-image: url("../img/Sole.png");
   mask-image: url("../img/Sole.png");
+
   mask-repeat: no-repeat;
   mask-size: 100% 100%;
 }
@@ -66,9 +68,9 @@
   height: 500px;
   width:950px;
   content: "";
-  position: absolute;
-  top: 102px;
-  left: 480px;
+  position: fixed;
+  top: 40px;
+  left: 700px;
   bottom: 0;
   z-index: 0;
   -webkit-mask-image: url("../img/SideBottom.png");
@@ -79,7 +81,7 @@
 
 .shape {
   content: "";
-  position: absolute;
+  position: fixed;
   bottom: 0;
   z-index: 0;
   mask-image: url("../img/Laces.png");
@@ -91,9 +93,9 @@
   height: 500px;
   width:950px;
   content: "";
-  position: absolute;
-  top: 105px;
-  left: 480px;
+  position: fixed;
+  top: 42px;
+  left: 701px;
   bottom: 0;
   z-index: 0;
   -webkit-mask-image: url("../img/Front.png");
@@ -105,9 +107,9 @@
   height: 500px;
   width:950px;
   content: "";
-  position: absolute;
-  top: 105px;
-  left: 480px;
+  position: fixed;
+  top: 43px;
+  left: 700px;
   bottom: 0;
   z-index: 0;
   -webkit-mask-image: url("../img/piece.png");
@@ -120,9 +122,9 @@
   height: 500px;
   width:950px;
   content: "";
-  position: absolute;
-  top: 105px;
-  left: 481px;
+  position: fixed;
+  top: 41px;
+  left: 704px;
   bottom: 0;
   z-index: 0;
   -webkit-mask-image: url("../img/BackFont.png");
