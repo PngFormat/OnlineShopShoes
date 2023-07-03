@@ -120,10 +120,6 @@ const CustomPage = () => {
 
             <CustomShape className={styles.pieceBack} backgroundColor={selectedBackFrontColor} />
 
-            <div>
-                <input type="file" accept="image/*" onChange={handleImageUpload} />
-                {selectedImage && <img src={URL.createObjectURL(selectedImage)} alt="Selected Image" />}
-            </div>
 
             <div className={styles.mainBlock}>
 
