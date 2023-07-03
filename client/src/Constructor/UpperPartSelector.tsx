@@ -1,4 +1,6 @@
 import React, { useState, useRef } from 'react';
+import styles from "../style/CustomShoes.module.scss";
+import CustomShape from "./Components/CustomShape";
 
 interface IUpperPartSelectorProps {
     onSelect?: (partType: string, selectedOption: string, imageUrl: string) => void;
@@ -17,8 +19,15 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
                                                                   onFrontColorSelect,
                                                                   onPieceColorSelect
                                                               }) => {
+    const fileInputRefs = useRef<HTMLInputElement[]>([]);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
-    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const [selectedImages, setSelectedImages] = useState({
+        laces: '',
+        back: '',
+        front: '',
+        piece: ''
+    });
 
     const handleSelection = (selectedOption: string) => {
         if (selectedOption === 'custom') {
@@ -35,8 +44,7 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
         }
 
         const upperPartImages: { [key: string]: string } = {
-            option1:
-                'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png',
+            option1: 'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png',
             option2: 'https://imgpng.ru/d/shoelaces_PNG28.png',
             // Add links for each upper part option
         };
@@ -48,34 +56,38 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
         onSelect?.('upperPart', '', '');
     };
 
-    const handleBackColorSelect = (color: string) => {
-        onBackColorSelect?.(color);
+    const handleColorSelect = (color: string, selectHandler: (color: string) => void) => {
+        selectHandler?.(color);
     };
 
-    const handleLacesColorSelect = (color: string) => {
-        onLacesColorSelect?.(color);
-    };
+    const handleImageUpload = (event, imageType) => {
+        const file = event.target.files?.[0];
 
-    const handleFrontColorSelect = (color: string) => {
-        onFrontColorSelect?.(color);
-    };
-
-    const handlePieceColorSelect = (color: string) => {
-        onPieceColorSelect?.(color);
-    };
-
-    const handleImageUpload = () => {
-        const file = fileInputRef.current?.files?.[0];
         if (file) {
-            setSelectedImage(file);
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const imageUrl = reader.result as string;
-                onSelect?.('custom', 'Custom Image', imageUrl);
-            };
-            reader.readAsDataURL(file);
+            const imageURL = URL.createObjectURL(file);
+            setSelectedImages(prevState => ({
+                ...prevState,
+                [imageType]: imageURL
+            }));
+        } else {
+            setSelectedImages(prevState => ({
+                ...prevState,
+                [imageType]: ''
+            }));
         }
     };
+
+    const renderCustomShape = (className: string, imageType: string) => (
+        <CustomShape
+            className={className}
+            backgroundImage={selectedImages[imageType] ? selectedImages[imageType] : undefined}
+            style={{
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+            }}
+        />
+    );
 
     return (
         <div>
@@ -100,32 +112,60 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
 
             <button onClick={clearSelectedOption}>Очистити</button>
             <h3>Колір шнурків</h3>
-            <input type="color" onChange={(e) => handleLacesColorSelect(e.target.value)} />
+            <input type="color" onChange={(e) => handleColorSelect(e.target.value, onLacesColorSelect)} />
             <h3>Завантажити власний дизайн</h3>
-            <input type="file" accept="image/*" onChange={handleImageUpload} ref={fileInputRef} />
+            <input
+                type="file"
+                accept="image/*"
+                onChange={(event) => handleImageUpload(event, 'laces')}
+                ref={(ref) => (fileInputRefs.current[0] = ref)}
+                name="shape"
+            />
             <div>
-                <hr/>
+                <hr />
             </div>
             <h3>Колір задника</h3>
-            <input type="color" onChange={(e) => handleBackColorSelect(e.target.value)} />
+            <input type="color" onChange={(e) => handleColorSelect(e.target.value, onBackColorSelect)} />
             <h3>Завантажити власний дизайн</h3>
-            <input type="file" accept="image/*" onChange={handleImageUpload} ref={fileInputRef} />
+            <input
+                type="file"
+                accept="image/*"
+                onChange={(event) => handleImageUpload(event, 'back')}
+                ref={(ref) => (fileInputRefs.current[1] = ref)}
+                name="back"
+            />
             <div>
-                <hr/>
+                <hr />
             </div>
             <h3>Бік кросівка</h3>
-            <input type="color" onChange={(e) => handleFrontColorSelect(e.target.value)} />
+            <input type="color" onChange={(e) => handleColorSelect(e.target.value, onFrontColorSelect)} />
             <h3>Завантажити власний дизайн</h3>
-            <input type="file" accept="image/*" onChange={handleImageUpload} ref={fileInputRef} />
+            <input
+                type="file"
+                accept="image/*"
+                onChange={(event) => handleImageUpload(event, 'front')}
+                ref={(ref) => (fileInputRefs.current[2] = ref)}
+                name="front"
+            />
             <div>
-                <hr/>
+                <hr />
             </div>
             <h3>Полоса</h3>
-            <input type="color" onChange={(e) => handlePieceColorSelect(e.target.value)} />
+            <input type="color" onChange={(e) => handleColorSelect(e.target.value, onPieceColorSelect)} />
             <h3>Завантажити власний дизайн</h3>
-            <input type="file" accept="image/*" onChange={handleImageUpload} ref={fileInputRef} />
+            <input
+                type="file"
+                accept="image/*"
+                onChange={(event) => handleImageUpload(event, 'piece')}
+                ref={(ref) => (fileInputRefs.current[3] = ref)}
+                name="piece"
+            />
+            {renderCustomShape(styles.shape, 'laces')}
+            {renderCustomShape(styles.back, 'back')}
+            {renderCustomShape(styles.front, 'front')}
+            {renderCustomShape(styles.piece, 'piece')}
             <div>
-                <hr/>
+                <hr />
             </div>
         </div>
     );

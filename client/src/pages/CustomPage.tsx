@@ -121,6 +121,7 @@ const CustomPage = () => {
             <CustomShape className={styles.pieceBack} backgroundColor={selectedBackFrontColor} />
 
 
+
             <div className={styles.mainBlock}>
 
                 <Constructor
