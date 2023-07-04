@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import styles from "../style/CustomShoes.module.scss";
 import CustomShape from "./Components/CustomShape";
+import ImageSlider from "./ImageSlider";
 
 interface IUpperPartSelectorProps {
     onSelect?: (partType: string, selectedOption: string, imageUrl: string) => void;
@@ -21,13 +22,18 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
                                                               }) => {
     const fileInputRefs = useRef<HTMLInputElement[]>([]);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
-
+    const [selectedOption, setSelectedOption] = useState(null);
     const [selectedImages, setSelectedImages] = useState({
         laces: '',
         back: '',
         front: '',
         piece: ''
     });
+
+
+    const handleSelectionImg = (option) => {
+        setSelectedOption(option);
+    };
 
     const handleSelection = (selectedOption: string) => {
         if (selectedOption === 'custom') {
@@ -92,22 +98,7 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
     return (
         <div>
             <h3>Верхня частина</h3>
-            <button onClick={() => handleSelection('option1')}>
-                <img
-                    width={100}
-                    height={100}
-                    src="https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png"
-                    alt="Upper Part Option 1"
-                />
-            </button>
-            <button onClick={() => handleSelection('option2')}>
-                <img
-                    width={100}
-                    height={100}
-                    src="https://imgpng.ru/d/shoelaces_PNG28.png"
-                    alt="Upper Part Option 2"
-                />
-            </button>
+            <ImageSlider></ImageSlider>
             {/* Add more buttons for other upper part options */}
 
             <button onClick={clearSelectedOption}>Очистити</button>
