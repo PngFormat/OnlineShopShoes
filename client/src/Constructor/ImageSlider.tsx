@@ -1,71 +1,50 @@
 import React, { useState } from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import styles from '../style/BasketPage.module.scss';
 
-const ImageSlider = () => {
-    const [selectedOption, setSelectedOption] = useState(null);
+const ImageSlider = ({ images, onSelectColor }) => {
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    const handleSelection = (option) => {
-        setSelectedOption(option);
+    const goToPrevious = () => {
+        setCurrentImageIndex((prevIndex) =>
+            prevIndex === 0 ? images.length - 1 : prevIndex - 1
+        );
     };
 
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        centerMode: true,
-        centerPadding: '300px' // Измените отступы по своему усмотрению
+    const goToNext = () => {
+        setCurrentImageIndex((prevIndex) =>
+            prevIndex === images.length - 1 ? 0 : prevIndex + 1
+        );
     };
 
+    const handleImageClick = () => {
+        const selectedColor = images[currentImageIndex].color;
+        onSelectColor(selectedColor);
+        console.log(selectedColor)
+    };
     return (
-        <div style={{ textAlign: 'center' }}>
-            <Slider {...settings}>
-                <div>
-                    <button onClick={() => handleSelection('option1')}>
-                        <img
-                            width={100}
-                            height={100}
-                            src="https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png"
-                            alt="Upper Part Option 1"
-                        />
-                    </button>
-                </div>
-                <div>
-                    <button onClick={() => handleSelection('option2')}>
-                        <img
-                            width={100}
-                            height={100}
-                            src="https://imgpng.ru/d/shoelaces_PNG28.png"
-                            alt="Upper Part Option 2"
-                        />
-                    </button>
-                </div>
-                <div>
-                    <button onClick={() => handleSelection('option3')}>
-                        <img
-                            width={100}
-                            height={100}
-                            src="https://example.com/image3.png"
-                            alt="Upper Part Option 3"
-                        />
-                    </button>
-                </div>
-                <div>
-                    <button onClick={() => handleSelection('option3')}>
-                        <img
-                            width={100}
-                            height={100}
-                            src="https://example.com/image3.png"
-                            alt="Upper Part Option 3"
-                        />
-                    </button>
-                </div>
-                {/* Добавьте другие кнопки с изображениями, если нужно */}
-            </Slider>
-            {selectedOption && <p>Selected option: {selectedOption}</p>}
+        <div>
+            <img
+                className={styles.onClick}
+                width={90}
+                height={65}
+                src='https://cdn-icons-png.flaticon.com/512/44/44765.png'
+                onClick={goToPrevious}
+            />
+            <img
+                width={200}
+                height={200}
+                src={images[currentImageIndex].src}
+                alt="carousel-image"
+                style={{ backgroundColor: images[currentImageIndex].color }}
+                onClick={handleImageClick}
+            />
+            <img
+                className={styles.onClick}
+                width={90}
+                height={80}
+                src='https://cdn-icons-png.flaticon.com/512/57/57116.png'
+                onClick={goToNext}
+            />
         </div>
     );
 };

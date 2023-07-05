@@ -30,7 +30,6 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
         piece: ''
     });
 
-
     const handleSelectionImg = (option) => {
         setSelectedOption(option);
     };
@@ -49,13 +48,19 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
             return selectedImage ? URL.createObjectURL(selectedImage) : '';
         }
 
-        const upperPartImages: { [key: string]: string } = {
-            option1: 'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png',
-            option2: 'https://imgpng.ru/d/shoelaces_PNG28.png',
-            // Add links for each upper part option
+        const upperPartImages: { [key: string]: { src: string; color: string } } = {
+            option1: {
+                src: 'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png',
+                color: '#FF0000'
+            },
+            option2: {
+                src: 'https://imgpng.ru/d/shoelaces_PNG28.png',
+                color: '#00FF00'
+            },
+            // Add more options with src and color properties
         };
 
-        return upperPartImages[option] || '';
+        return upperPartImages[option]?.src || '';
     };
 
     const clearSelectedOption = () => {
@@ -95,10 +100,16 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
         />
     );
 
+    // const images = [
+    //     { src: 'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png', color: '#000000' },
+    //     { src: 'https://images.prom.ua/2895375213_w640_h640_shnurki-dlya-obuvi.jpg', color: '#ffd000' },
+    //     { src: 'https://content2.rozetka.com.ua/goods/images/big/84310538.jpg', color: '#ff0025' }
+    // ];
+
     return (
         <div>
             <h3>Верхня частина</h3>
-            <ImageSlider></ImageSlider>
+            {/*<ImageSlider images={images} onSelectColor={handleColorSelect} />*/}
             {/* Add more buttons for other upper part options */}
 
             <button onClick={clearSelectedOption}>Очистити</button>

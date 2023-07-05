@@ -4,6 +4,7 @@ import Constructor from '../Constructor/Constructor';
 import CustomShape from '../Constructor/Components/CustomShape';
 import { Image } from 'react-bootstrap';
 import BottomPartSelector from "../Constructor/BottomPartSelector";
+import ImageSlider from "../Constructor/ImageSlider";
 
 const CustomPage = () => {
     const [selectedLaceColor, setSelectedLaceColor] = useState('');
@@ -14,6 +15,8 @@ const CustomPage = () => {
     const [selectedFrontColor, setSelectedFrontColor] = useState('');
     const [selectedPieceColor, setSelectedPieceColor] = useState('');
     const [selectedBackFrontColor, setBackFrontColor] = useState('');
+
+    const [selectedImageColor, setSelectedImageColor] = useState('');
 
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const [selectedImageURL, setSelectedImageURL] = useState<string>('');
@@ -61,9 +64,21 @@ const CustomPage = () => {
     const handleBackFrontColorSelect = (colorPiece) => {
         setBackFrontColor(colorPiece);
     };
+    const handleColorSelect = (color: string, selectHandler: (color: string) => void) => {
+        selectHandler?.(color);
+    };
+    const handleColorSelectProp = (color) => {
+        setSelectedImageColor(color);
+    };
 
     console.log(selectedImageURL);
 
+    const images = [
+        { src: 'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png', color: '#000000' },
+        { src: 'https://images.prom.ua/2895375213_w640_h640_shnurki-dlya-obuvi.jpg', color: '#ffd000' },
+        { src: 'https://content2.rozetka.com.ua/goods/images/big/84310538.jpg', color: '#ff0025' }
+    ];
+    console.log(selectedImageColor)
     return (
         <div>
             <h1>Кастомізація взуття</h1>
@@ -71,6 +86,7 @@ const CustomPage = () => {
                 className={styles.imageContainer}
                 style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }}
             >
+
                 <img
                     width={650}
                     height={400}
@@ -89,7 +105,7 @@ const CustomPage = () => {
                     left: 690,
                     backgroundImage: `url("../img/Dots.png")`,
                 }}
-                backgroundColor={selectedLaceColor}
+                backgroundColor={selectedImageColor ? selectedImageColor : selectedLaceColor}
             />
 
             <CustomShape className={styles.back} backgroundColor={selectedBackColor} />
@@ -123,7 +139,7 @@ const CustomPage = () => {
 
 
             <div className={styles.mainBlock}>
-
+                <ImageSlider images={images} onSelectColor={handleColorSelect} />
                 <Constructor
                     onSoleColorSelect={handleSoleColorSelect}
                     onSoleBottomColorSelect={handleSoleBottomColorSelect}
