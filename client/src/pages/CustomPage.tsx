@@ -5,6 +5,7 @@ import CustomShape from '../Constructor/Components/CustomShape';
 import { Image } from 'react-bootstrap';
 import BottomPartSelector from "../Constructor/BottomPartSelector";
 import ImageSlider from "../Constructor/ImageSlider";
+import DoneCustomShoes from "../Constructor/Components/DoneCustomShoes";
 
 const CustomPage = () => {
     const [selectedLaceColor, setSelectedLaceColor] = useState('');
@@ -151,6 +152,17 @@ const CustomPage = () => {
                     onBackFrontColorSelect={handleBackFrontColorSelect}
                 />
             </div>
+            <DoneCustomShoes selectedBackColor={selectedBackColor}
+                             selectedBackFrontColor={selectedBackFrontColor}
+                             selectedFrontColor={selectedFrontColor}
+                             selectedImageColor={selectedImageColor}
+                             selectedImageURL={selectedImageURL}
+                             selectedLaceColor={selectedLaceColor}
+                             selectedPieceColor={selectedPieceColor}
+                             selectedSideBottomColor={selectedSideBottomColor}
+                             selectedSoleBottomColor={selectedSoleBottomColor}
+                             selectedSoleColor={selectedSoleColor}
+            ></DoneCustomShoes>
         </div>
     );
 };

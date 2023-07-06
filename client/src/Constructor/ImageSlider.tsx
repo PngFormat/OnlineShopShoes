@@ -37,6 +37,7 @@ const ImageSlider = ({ images, onSelectColor }) => {
                 alt="carousel-image"
                 style={{ backgroundColor: images[currentImageIndex].color }}
                 onClick={handleImageClick}
+                className={styles.onClickPhoto}
             />
             <img
                 className={styles.onClick}
