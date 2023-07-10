@@ -3,6 +3,7 @@ import styles from "../style/CustomShoes.module.scss";
 import CustomShape from "./Components/CustomShape";
 import ImageSlider from "./ImageSlider";
 
+
 interface IUpperPartSelectorProps {
     onSelect?: (partType: string, selectedOption: string, imageUrl: string) => void;
     onUpperPartImageClick?: () => void;

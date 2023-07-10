@@ -3,7 +3,8 @@ export enum AuthorisedPath{
  BASKET_ROUTE = '/basket',
  FAVORITEPAGE_ROUTE = '/favorite',
  MAINPAGE_ROUTE = '/main',
- CUSTOMPAGE_ROUTE = '/custom'
+ CUSTOMPAGE_ROUTE = '/custom',
+    DONECUSTOM_ROUTE = '/doneshoes'
  
 }
 export enum UnauthorisedPath{

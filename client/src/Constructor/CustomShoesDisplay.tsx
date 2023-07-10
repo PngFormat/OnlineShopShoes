@@ -1,21 +1,36 @@
 import React from 'react';
+import CustomShape from "./Components/CustomShape";
 import styles from '../style/CustomShoes.module.scss';
-import CustomShape from "./CustomShape";
 
-const DoneCustomShoes = ({
-                                   selectedImageColor,
-                                   selectedLaceColor,
-                                   selectedBackColor,
-                                   selectedSoleColor,
-                                   selectedSoleBottomColor,
-                                   selectedSideBottomColor,
-                                   selectedFrontColor,
-                                   selectedPieceColor,
-                                   selectedBackFrontColor,
-                                   selectedImageURL,
-                               }) => {
+const CustomShoesDisplay = ({
+                                selectedImageColor,
+                                selectedLaceColor,
+                                selectedBackColor,
+                                selectedSoleColor,
+                                selectedSoleBottomColor,
+                                selectedSideBottomColor,
+                                selectedFrontColor,
+                                selectedPieceColor,
+                                selectedBackFrontColor,
+                                selectedImageURL,
+                            }) => {
+    console.log(selectedLaceColor)
+
     return (
         <div>
+            <div
+                className={styles.imageContainer}
+                style={{ marginLeft:200, position: 'fixed', top: 0, left: 0, zIndex: -1 }}
+            >
+
+                <img
+                    width={650}
+                    height={400}
+                    className={styles.customImage}
+                    src="https://img.freepik.com/premium-vector/outline-cool-sneakers-shoes-sneaker-outline-drawing-vector-sneakers-drawn-in-a-sketch-style_681139-169.jpg"
+                    alt="Кастом"
+                />
+            </div>
             <CustomShape
                 className={styles.shape}
                 style={{
@@ -36,6 +51,7 @@ const DoneCustomShoes = ({
                 className={styles.sole}
                 backgroundColor={selectedSoleBottomColor}
                 style={{
+                    margin:30,
                     backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : 'не выбрано',
                     backgroundSize: 'cover',
                 }}
@@ -59,4 +75,4 @@ const DoneCustomShoes = ({
     );
 };
 
-export default DoneCustomShoes;
+export default CustomShoesDisplay;

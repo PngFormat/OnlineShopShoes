@@ -14,6 +14,7 @@ export const Context = React.createContext<any>(null)
 ReactDOM.render(
     <SearchProvider>
     <CartProvider>
+
     <Context.Provider value={{
     user: userStore,
     device: deviceStore,

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styles from '../style/CustomShoes.module.scss';
 import Constructor from '../Constructor/Constructor';
 import CustomShape from '../Constructor/Components/CustomShape';
-import { Image } from 'react-bootstrap';
-import BottomPartSelector from "../Constructor/BottomPartSelector";
+
 import ImageSlider from "../Constructor/ImageSlider";
-import DoneCustomShoes from "../Constructor/Components/DoneCustomShoes";
+
+import { CustomPageContextProvider } from "../Context/CustomPageContext";
 
 const CustomPage = () => {
     const [selectedLaceColor, setSelectedLaceColor] = useState('');
@@ -21,7 +21,9 @@ const CustomPage = () => {
 
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const [selectedImageURL, setSelectedImageURL] = useState<string>('');
-    console.log(selectedImageURL);
+
+
+
 
     useEffect(() => {
         if (selectedImageURL) {
@@ -72,7 +74,7 @@ const CustomPage = () => {
         setSelectedImageColor(color);
     };
 
-    console.log(selectedImageURL);
+
 
     const images = [
         { src: 'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png', color: '#000000' },
@@ -151,18 +153,12 @@ const CustomPage = () => {
                     onPieceColorSelect={handlePieceColorSelect}
                     onBackFrontColorSelect={handleBackFrontColorSelect}
                 />
+
+
+
             </div>
-            <DoneCustomShoes selectedBackColor={selectedBackColor}
-                             selectedBackFrontColor={selectedBackFrontColor}
-                             selectedFrontColor={selectedFrontColor}
-                             selectedImageColor={selectedImageColor}
-                             selectedImageURL={selectedImageURL}
-                             selectedLaceColor={selectedLaceColor}
-                             selectedPieceColor={selectedPieceColor}
-                             selectedSideBottomColor={selectedSideBottomColor}
-                             selectedSoleBottomColor={selectedSoleBottomColor}
-                             selectedSoleColor={selectedSoleColor}
-            ></DoneCustomShoes>
+
+
         </div>
     );
 };

@@ -43,7 +43,9 @@ const App = observer(() => {
         <BrowserRouter>
             {isOpen ? <Basket onRemove={onRemoveItem} items={cartItems} onClickClose={() => setIsOpen(false)}></Basket> : null}
             <NavBar onClickCart={() => setIsOpen(true)} />
+
             <AppRouter />
+
 
 
         </BrowserRouter>
