@@ -1,20 +1,22 @@
 import React from 'react';
 import CustomShape from "./Components/CustomShape";
 import styles from '../style/CustomShoes.module.scss';
+import {useCustomPageContextProvider} from "../Context/CustomPageContext";
 
-const CustomShoesDisplay = ({
-                                selectedImageColor,
-                                selectedLaceColor,
-                                selectedBackColor,
-                                selectedSoleColor,
-                                selectedSoleBottomColor,
-                                selectedSideBottomColor,
-                                selectedFrontColor,
-                                selectedPieceColor,
-                                selectedBackFrontColor,
-                                selectedImageURL,
-                            }) => {
+const CustomShoesDisplay = () => {
+    const {selectedLaceColor,
+        selectedBackColor,
+        selectedBackFrontColor,
+        selectedFrontColor,
+        selectedImageColor,
+        selectedImageURL,
+        selectedPieceColor,
+        selectedSideBottomColor,
+        selectedSoleBottomColor,
+        selectedSoleColor
+    } = useCustomPageContextProvider()
     console.log(selectedLaceColor)
+
 
     return (
         <div>

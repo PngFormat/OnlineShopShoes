@@ -1,5 +1,6 @@
 import React from 'react';
 import CustomShoesDisplay from "../Constructor/CustomShoesDisplay";
+import ContextProviderCustom from "../Context/CustomPageContext";
 
 const CustomShoesPage = ({
                              selectedBackColor,
@@ -16,18 +17,10 @@ const CustomShoesPage = ({
     return (
         <div>
             <h1>Custom Shoes Page</h1>
+            <ContextProviderCustom>
             <CustomShoesDisplay
-                selectedBackColor={selectedBackColor}
-                selectedBackFrontColor={selectedBackFrontColor}
-                selectedFrontColor={selectedFrontColor}
-                selectedImageColor={selectedImageColor}
-                selectedImageURL={selectedImageURL}
-                selectedLaceColor={selectedLaceColor}
-                selectedPieceColor={selectedPieceColor}
-                selectedSideBottomColor={selectedSideBottomColor}
-                selectedSoleBottomColor={selectedSoleBottomColor}
-                selectedSoleColor={selectedSoleColor}
             />
+            </ContextProviderCustom>
         </div>
     );
 };

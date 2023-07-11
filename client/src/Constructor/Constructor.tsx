@@ -47,6 +47,7 @@ const Constructor: React.FC<IConstructorProps> = ({
         laces: undefined
     });
 
+
     const handlePartSelection = (
         partType: keyof IConstructorState,
         selectedOption: string,

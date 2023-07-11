@@ -6,12 +6,14 @@ import userStore from './store/userStore';
 import CartProvider, {CartContext} from "./Context/cartContext";
 import SearchProvider from "./Context/searchContext";
 import MainPage from "./pages/MainPage";
+import ContextProviderCustom from "./Context/CustomPageContext";
 
 
 
 export const Context = React.createContext<any>(null)
 
 ReactDOM.render(
+    <ContextProviderCustom>
     <SearchProvider>
     <CartProvider>
 
@@ -23,6 +25,7 @@ ReactDOM.render(
     </Context.Provider>
     </CartProvider>,
     </SearchProvider>,
+    </ContextProviderCustom>,
 
     document.getElementById('root')
 );

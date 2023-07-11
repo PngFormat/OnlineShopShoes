@@ -2,34 +2,56 @@ import React, { useEffect, useState } from 'react';
 import styles from '../style/CustomShoes.module.scss';
 import Constructor from '../Constructor/Constructor';
 import CustomShape from '../Constructor/Components/CustomShape';
-
+import CustomShoesPage from "./CustomShoesPage";
 import ImageSlider from "../Constructor/ImageSlider";
-
-import { CustomPageContextProvider } from "../Context/CustomPageContext";
+import ContextProviderCustom from "../Context/CustomPageContext";
 
 const CustomPage = () => {
-    const [selectedLaceColor, setSelectedLaceColor] = useState('');
-    const [selectedSoleColor, setSelectedSoleColor] = useState('');
-    const [selectedSoleBottomColor, setSelectedSoleBottomColor] = useState('');
-    const [selectedSideBottomColor, setSelectedSideBottomColor] = useState('');
-    const [selectedBackColor, setSelectedBackColor] = useState('');
-    const [selectedFrontColor, setSelectedFrontColor] = useState('');
-    const [selectedPieceColor, setSelectedPieceColor] = useState('');
-    const [selectedBackFrontColor, setBackFrontColor] = useState('');
+    const [selectedLaceColor, setSelectedLaceColor] = useState('red');
+    const [selectedSoleColor, setSelectedSoleColor] = useState('red');
+    const [selectedSoleBottomColor, setSelectedSoleBottomColor] = useState('red');
+    const [selectedSideBottomColor, setSelectedSideBottomColor] = useState('red');
+    const [selectedBackColor, setSelectedBackColor] = useState('red');
+    const [selectedFrontColor, setSelectedFrontColor] = useState('red');
+    const [selectedPieceColor, setSelectedPieceColor] = useState('red');
+    const [selectedBackFrontColor, setBackFrontColor] = useState('red');
 
-    const [selectedImageColor, setSelectedImageColor] = useState('');
+    const [selectedImageColor, setSelectedImageColor] = useState('red');
 
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const [selectedImageURL, setSelectedImageURL] = useState<string>('');
 
 
-
+    useEffect(() => {
+        localStorage.setItem('selectedLaceColor', selectedLaceColor);
+        localStorage.setItem('selectedSoleColor', selectedSoleColor);
+        localStorage.setItem('selectedSoleBottomColor', selectedSoleBottomColor);
+        localStorage.setItem('selectedSideBottomColor', selectedSideBottomColor);
+        localStorage.setItem('selectedBackColor', selectedBackColor);
+        localStorage.setItem('selectedFrontColor', selectedFrontColor);
+        localStorage.setItem('selectedPieceColor', selectedPieceColor);
+        localStorage.setItem('selectedBackFrontColor', selectedBackFrontColor);
+    }, [
+        selectedLaceColor,
+        selectedSoleColor,
+        selectedSoleBottomColor,
+        selectedSideBottomColor,
+        selectedBackColor,
+        selectedFrontColor,
+        selectedPieceColor,
+        selectedBackFrontColor
+    ]);
 
     useEffect(() => {
-        if (selectedImageURL) {
-            URL.revokeObjectURL(selectedImageURL);
-        }
-    }, [selectedImageURL]);
+        // Load selected colors from localStorage when component mounts
+        setSelectedLaceColor(localStorage.getItem('selectedLaceColor') || '');
+        setSelectedSoleColor(localStorage.getItem('selectedSoleColor') || '');
+        setSelectedSoleBottomColor(localStorage.getItem('selectedSoleBottomColor') || '');
+        setSelectedSideBottomColor(localStorage.getItem('selectedSideBottomColor') || '');
+        setSelectedBackColor(localStorage.getItem('selectedBackColor') || '');
+        setSelectedFrontColor(localStorage.getItem('selectedFrontColor') || '');
+        setSelectedPieceColor(localStorage.getItem('selectedPieceColor') || '');
+    }, []);
 
     const handleImageUpload = (imageURL) => {
         setSelectedImageURL(imageURL);
@@ -139,8 +161,6 @@ const CustomPage = () => {
 
             <CustomShape className={styles.pieceBack} backgroundColor={selectedBackFrontColor} />
 
-
-
             <div className={styles.mainBlock}>
                 <ImageSlider images={images} onSelectColor={handleColorSelect} />
                 <Constructor
@@ -155,10 +175,7 @@ const CustomPage = () => {
                 />
 
 
-
             </div>
-
-
         </div>
     );
 };
