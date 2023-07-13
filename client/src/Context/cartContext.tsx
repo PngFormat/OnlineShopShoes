@@ -26,10 +26,10 @@ const CartProvider: React.FC = ({ children }) => {
         setGender,
     };
 
-    useEffect(() => {
-        console.log('Карточки', cartItems)
-        console.log('Избранное', favorites)
-    },[cartItems,favorites])
+    // useEffect(() => {
+    //     console.log('Карточки', cartItems)
+    //     console.log('Избранное', favorites)
+    // },[cartItems,favorites])
 
     return (
         <CartContext.Provider

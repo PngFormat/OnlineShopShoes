@@ -4,22 +4,29 @@ import Constructor from '../Constructor/Constructor';
 import CustomShape from '../Constructor/Components/CustomShape';
 import CustomShoesPage from "./CustomShoesPage";
 import ImageSlider from "../Constructor/ImageSlider";
-import ContextProviderCustom from "../Context/CustomPageContext";
+import ContextProviderCustom, {useCustomPageContextProvider} from "../Context/CustomPageContext";
+import {AuthorisedPath} from "../utils/Path";
+import {Button} from "react-bootstrap";
+import {useHistory} from "react-router-dom";
+
 
 const CustomPage = () => {
-    const [selectedLaceColor, setSelectedLaceColor] = useState('red');
-    const [selectedSoleColor, setSelectedSoleColor] = useState('red');
-    const [selectedSoleBottomColor, setSelectedSoleBottomColor] = useState('red');
-    const [selectedSideBottomColor, setSelectedSideBottomColor] = useState('red');
-    const [selectedBackColor, setSelectedBackColor] = useState('red');
-    const [selectedFrontColor, setSelectedFrontColor] = useState('red');
-    const [selectedPieceColor, setSelectedPieceColor] = useState('red');
-    const [selectedBackFrontColor, setBackFrontColor] = useState('red');
+    const history = useHistory();
+    const {selectedLaceColor, setSelectedLaceColor,
+        selectedSoleColor, setSelectedSoleColor,
+        selectedSoleBottomColor, setSelectedSoleBottomColor,
+        selectedSideBottomColor, setSelectedSideBottomColor,
+        selectedBackColor, setSelectedBackColor,
+        selectedFrontColor, setSelectedFrontColor,
+        selectedPieceColor, setSelectedPieceColor,
+        selectedBackFrontColor, setBackFrontColor,
+        selectedImageColor, setSelectedImageColor,
+        selectedImage, setSelectedImage,
+        selectedImageURL, setSelectedImageURL} = useCustomPageContextProvider();
 
-    const [selectedImageColor, setSelectedImageColor] = useState('red');
 
-    const [selectedImage, setSelectedImage] = useState<File | null>(null);
-    const [selectedImageURL, setSelectedImageURL] = useState<string>('');
+
+
 
 
     useEffect(() => {
@@ -42,16 +49,7 @@ const CustomPage = () => {
         selectedBackFrontColor
     ]);
 
-    useEffect(() => {
-        // Load selected colors from localStorage when component mounts
-        setSelectedLaceColor(localStorage.getItem('selectedLaceColor') || '');
-        setSelectedSoleColor(localStorage.getItem('selectedSoleColor') || '');
-        setSelectedSoleBottomColor(localStorage.getItem('selectedSoleBottomColor') || '');
-        setSelectedSideBottomColor(localStorage.getItem('selectedSideBottomColor') || '');
-        setSelectedBackColor(localStorage.getItem('selectedBackColor') || '');
-        setSelectedFrontColor(localStorage.getItem('selectedFrontColor') || '');
-        setSelectedPieceColor(localStorage.getItem('selectedPieceColor') || '');
-    }, []);
+
 
     const handleImageUpload = (imageURL) => {
         setSelectedImageURL(imageURL);
@@ -89,13 +87,14 @@ const CustomPage = () => {
     const handleBackFrontColorSelect = (colorPiece) => {
         setBackFrontColor(colorPiece);
     };
+
     const handleColorSelect = (color: string, selectHandler: (color: string) => void) => {
         selectHandler?.(color);
     };
+
     const handleColorSelectProp = (color) => {
         setSelectedImageColor(color);
     };
-
 
 
     const images = [
@@ -103,80 +102,81 @@ const CustomPage = () => {
         { src: 'https://images.prom.ua/2895375213_w640_h640_shnurki-dlya-obuvi.jpg', color: '#ffd000' },
         { src: 'https://content2.rozetka.com.ua/goods/images/big/84310538.jpg', color: '#ff0025' }
     ];
-    console.log(selectedImageColor)
+
+    console.log(selectedLaceColor)
+
     return (
-        <div>
-            <h1>Кастомізація взуття</h1>
-            <div
-                className={styles.imageContainer}
-                style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }}
-            >
+            <div>
+                <h1>Кастомізація взуття</h1>
+                <div
+                    className={styles.imageContainer}
+                    style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }}
+                >
+                    <img
+                        width={650}
+                        height={400}
+                        className={styles.customImage}
+                        src="https://img.freepik.com/premium-vector/outline-cool-sneakers-shoes-sneaker-outline-drawing-vector-sneakers-drawn-in-a-sketch-style_681139-169.jpg"
+                        alt="Кастом"
+                    />
+                </div>
 
-                <img
-                    width={650}
-                    height={400}
-                    className={styles.customImage}
-                    src="https://img.freepik.com/premium-vector/outline-cool-sneakers-shoes-sneaker-outline-drawing-vector-sneakers-drawn-in-a-sketch-style_681139-169.jpg"
-                    alt="Кастом"
-                />
-            </div>
-
-            <CustomShape
-                className={styles.shape}
-                style={{
-                    height: 500,
-                    width: 970,
-                    top: 47,
-                    left: 690,
-                    backgroundImage: `url("../img/Dots.png")`,
-                }}
-                backgroundColor={selectedImageColor ? selectedImageColor : selectedLaceColor}
-            />
-
-            <CustomShape className={styles.back} backgroundColor={selectedBackColor} />
-
-            <CustomShape className={styles.bottom} backgroundColor={selectedSoleColor} />
-
-            <CustomShape
-                className={styles.sole}
-                backgroundColor={selectedSoleBottomColor}
-                style={{
-                    backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : 'не выбрано',
-                    backgroundSize: 'cover',
-                }}
-            />
-
-            <CustomShape
-                className={styles.sideBottom}
-                backgroundColor={selectedSideBottomColor}
-                style={{
-                    backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : '',
-                    backgroundSize: 'cover',
-                }}
-            />
-
-            <CustomShape className={styles.front} backgroundColor={selectedFrontColor} />
-
-            <CustomShape className={styles.piece} backgroundColor={selectedPieceColor} />
-
-            <CustomShape className={styles.pieceBack} backgroundColor={selectedBackFrontColor} />
-
-            <div className={styles.mainBlock}>
-                <ImageSlider images={images} onSelectColor={handleColorSelect} />
-                <Constructor
-                    onSoleColorSelect={handleSoleColorSelect}
-                    onSoleBottomColorSelect={handleSoleBottomColorSelect}
-                    onSideBottomColorSelect={handleSideBottomColorSelect}
-                    onLacesColorSelect={handleLacesColorSelect}
-                    onBackColorSelect={handleBackColorSelect}
-                    onFrontColorSelect={handleFrontColorSelect}
-                    onPieceColorSelect={handlePieceColorSelect}
-                    onBackFrontColorSelect={handleBackFrontColorSelect}
+                <CustomShape
+                    className={styles.shape}
+                    style={{
+                        height: 500,
+                        width: 970,
+                        top: 47,
+                        left: 690,
+                        backgroundImage: `url("../img/Dots.png")`,
+                    }}
+                    backgroundColor={selectedImageColor ? selectedImageColor : selectedLaceColor}
                 />
 
+                <CustomShape className={styles.back} backgroundColor={selectedBackColor} />
+
+                <CustomShape className={styles.bottom} backgroundColor={selectedSoleColor} />
+
+                <CustomShape
+                    className={styles.sole}
+                    backgroundColor={selectedSoleBottomColor}
+                    style={{
+                        backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : 'не выбрано',
+                        backgroundSize: 'cover',
+                    }}
+                />
+
+                <CustomShape
+                    className={styles.sideBottom}
+                    backgroundColor={selectedSideBottomColor}
+                    style={{
+                        backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : '',
+                        backgroundSize: 'cover',
+                    }}
+                />
+
+                <CustomShape className={styles.front} backgroundColor={selectedFrontColor} />
+
+                <CustomShape className={styles.piece} backgroundColor={selectedPieceColor} />
+
+                <CustomShape className={styles.pieceBack} backgroundColor={selectedBackFrontColor} />
+
+                <div className={styles.mainBlock}>
+                    <Button onClick={() => history.push(AuthorisedPath.DONECUSTOM_ROUTE)} variant={'dark'}>Виконати</Button>
+                    <ImageSlider images={images} onSelectColor={handleColorSelect} />
+                    <Constructor
+                        onSoleColorSelect={handleSoleColorSelect}
+                        onSoleBottomColorSelect={handleSoleBottomColorSelect}
+                        onSideBottomColorSelect={handleSideBottomColorSelect}
+                        onLacesColorSelect={handleLacesColorSelect}
+                        onBackColorSelect={handleBackColorSelect}
+                        onFrontColorSelect={handleFrontColorSelect}
+                        onPieceColorSelect={handlePieceColorSelect}
+                        onBackFrontColorSelect={handleBackFrontColorSelect}
+                    />
+                </div>
 
             </div>
-        </div>
     );
 };
 

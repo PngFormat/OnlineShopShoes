@@ -1,21 +1,18 @@
 import React from 'react';
 import CustomShape from "./Components/CustomShape";
 import styles from '../style/CustomShoes.module.scss';
-import {useCustomPageContextProvider} from "../Context/CustomPageContext";
 
-const CustomShoesDisplay = () => {
-    const {selectedLaceColor,
-        selectedBackColor,
-        selectedBackFrontColor,
-        selectedFrontColor,
-        selectedImageColor,
-        selectedImageURL,
-        selectedPieceColor,
-        selectedSideBottomColor,
-        selectedSoleBottomColor,
-        selectedSoleColor
-    } = useCustomPageContextProvider()
-    console.log(selectedLaceColor)
+
+const CustomShoesDisplay = ({ selectedLaceColor,
+                                selectedBackColor,
+                                selectedBackFrontColor,
+                                selectedFrontColor,
+                                selectedImageColor,
+                                selectedImageURL,
+                                selectedPieceColor,
+                                selectedSideBottomColor,
+                                selectedSoleBottomColor,
+                                selectedSoleColor}) => {
 
 
     return (
@@ -39,10 +36,10 @@ const CustomShoesDisplay = () => {
                     height: 500,
                     width: 970,
                     top: 47,
-                    left: 690,
+                    left: 190,
                     backgroundImage: `url("../img/Dots.png")`,
                 }}
-                backgroundColor={selectedImageColor ? selectedImageColor : selectedLaceColor}
+                backgroundColor={ selectedLaceColor}
             />
 
             <CustomShape className={styles.back} backgroundColor={selectedBackColor} />
