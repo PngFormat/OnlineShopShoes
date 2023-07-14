@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import styles from "../style/CustomShoes.module.scss";
 import CustomShape from "./Components/CustomShape";
 import ImageSlider from "./ImageSlider";
+import {useCustomPageContextProvider} from "../Context/CustomPageContext";
 
 
 interface IUpperPartSelectorProps {
@@ -30,6 +31,7 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
         front: '',
         piece: ''
     });
+    const context = useCustomPageContextProvider();
 
     const handleSelectionImg = (option) => {
         setSelectedOption(option);
@@ -77,15 +79,17 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
 
         if (file) {
             const imageURL = URL.createObjectURL(file);
-            setSelectedImages(prevState => ({
+            setSelectedImages((prevState) => ({
                 ...prevState,
-                [imageType]: imageURL
+                [imageType]: imageURL,
             }));
+            context.setSelectedImageURL(imageURL); // Set the selected image URL in the context
         } else {
-            setSelectedImages(prevState => ({
+            setSelectedImages((prevState) => ({
                 ...prevState,
-                [imageType]: ''
+                [imageType]: "",
             }));
+            context.setSelectedImageURL(""); // Clear the selected image URL in the context
         }
     };
 
@@ -100,6 +104,7 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
             }}
         />
     );
+
 
     // const images = [
     //     { src: 'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png', color: '#000000' },

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import CustomShape from "./Components/CustomShape";
 import styles from '../style/CustomShoes.module.scss';
+import Constructor from "./Constructor";
+import {useCart} from "../Context/cartContext";
+import {useCustomPageContextProvider} from "../Context/CustomPageContext";
 
 
 const CustomShoesDisplay = ({ selectedLaceColor,
@@ -8,20 +11,19 @@ const CustomShoesDisplay = ({ selectedLaceColor,
                                 selectedBackFrontColor,
                                 selectedFrontColor,
                                 selectedImageColor,
-                                selectedImageURL,
                                 selectedPieceColor,
                                 selectedSideBottomColor,
                                 selectedSoleBottomColor,
                                 selectedSoleColor}) => {
 
 
+
+    const context = useCustomPageContextProvider();
+    const { selectedImageURL } = context;
+    console.log(selectedImageURL)
     return (
         <div>
-            <div
-                className={styles.imageContainer}
-                style={{ marginLeft:200, position: 'fixed', top: 0, left: 0, zIndex: -1 }}
-            >
-
+            <div className={styles.imageContainer} style={{ marginLeft: 200, position: 'fixed', top: 0, left: 0, zIndex: -1 }}>
                 <img
                     width={650}
                     height={400}
@@ -32,14 +34,12 @@ const CustomShoesDisplay = ({ selectedLaceColor,
             </div>
             <CustomShape
                 className={styles.shape}
+                backgroundImage={selectedImageURL ? `url("${selectedImageURL}")` : undefined}
                 style={{
-                    height: 500,
-                    width: 970,
-                    top: 47,
-                    left: 190,
-                    backgroundImage: `url("../img/Dots.png")`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
                 }}
-                backgroundColor={ selectedLaceColor}
             />
 
             <CustomShape className={styles.back} backgroundColor={selectedBackColor} />
@@ -50,7 +50,7 @@ const CustomShoesDisplay = ({ selectedLaceColor,
                 className={styles.sole}
                 backgroundColor={selectedSoleBottomColor}
                 style={{
-                    margin:30,
+                    margin: 30,
                     backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : 'не выбрано',
                     backgroundSize: 'cover',
                 }}
@@ -70,6 +70,7 @@ const CustomShoesDisplay = ({ selectedLaceColor,
             <CustomShape className={styles.piece} backgroundColor={selectedPieceColor} />
 
             <CustomShape className={styles.pieceBack} backgroundColor={selectedBackFrontColor} />
+
         </div>
     );
 };

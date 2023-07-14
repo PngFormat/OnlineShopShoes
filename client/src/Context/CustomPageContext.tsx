@@ -52,7 +52,7 @@ const ContextProviderCustom: React.FC = ({ children }) => {
         setSelectedSoleColor,
         setSelectedImage
     };
-    console.log(selectedLaceColor)
+    console.log(selectedImageURL)
     return (
         <CustomPageContext.Provider value={value}>
             {children}

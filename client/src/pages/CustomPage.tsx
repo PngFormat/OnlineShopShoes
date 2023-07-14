@@ -103,7 +103,7 @@ const CustomPage = () => {
         { src: 'https://content2.rozetka.com.ua/goods/images/big/84310538.jpg', color: '#ff0025' }
     ];
 
-    console.log(selectedLaceColor)
+    console.log(selectedImageURL)
 
     return (
             <div>
@@ -128,7 +128,7 @@ const CustomPage = () => {
                         width: 970,
                         top: 47,
                         left: 690,
-                        backgroundImage: `url("../img/Dots.png")`,
+                        backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : 'не выбрано',
                     }}
                     backgroundColor={selectedImageColor ? selectedImageColor : selectedLaceColor}
                 />

@@ -1,8 +1,22 @@
 import React from 'react';
 import CustomShoesDisplay from "../Constructor/CustomShoesDisplay";
 import ContextProviderCustom, {useCustomPageContextProvider} from "../Context/CustomPageContext";
+import html2canvas from 'html2canvas';
+
 
 const CustomShoesPage = () => {
+
+        const handleScreenshot = () => {
+            html2canvas(document.body).then(canvas => {
+                const screenshot = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.href = screenshot;
+                link.download = 'screenshot.png';
+                link.click();
+            });
+        };
+
+
     const {
         selectedLaceColor,
         selectedBackColor,
@@ -24,12 +38,14 @@ const CustomShoesPage = () => {
                                     selectedSideBottomColor={selectedSideBottomColor}
                                     selectedPieceColor={selectedPieceColor}
                                     selectedLaceColor={selectedLaceColor}
-                                    selectedImageURL={selectedImageURL}
                                     selectedImageColor={selectedImageColor}
                                     selectedFrontColor={selectedFrontColor}
                                     selectedBackFrontColor={selectedBackFrontColor}
                                     selectedBackColor={selectedBackColor}
                 />
+            <button onClick={handleScreenshot}>
+                Take Screenshot
+            </button>
         </div>
     );
 };
