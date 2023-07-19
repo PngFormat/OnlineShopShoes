@@ -21,11 +21,7 @@ const CustomPage = () => {
         selectedPieceColor, setSelectedPieceColor,
         selectedBackFrontColor, setBackFrontColor,
         selectedImageColor, setSelectedImageColor,
-        selectedImage, setSelectedImage,
         selectedImageURL, setSelectedImageURL} = useCustomPageContextProvider();
-
-
-
 
 
 

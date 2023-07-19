@@ -12,15 +12,27 @@ const CustomShape: React.FC<ICustomShapeProps> = ({ className, backgroundColor, 
 
     useEffect(() => {
         if (backgroundImage) {
-            const image = new Image();
-            image.onload = () => {
-                setUploadedImage(backgroundImage);
-            };
-            image.src = backgroundImage;
+            // Check if the image URL is a Blob URL
+            const isBlobUrl = backgroundImage.startsWith('blob:');
+            if (isBlobUrl) {
+                fetch(backgroundImage)
+                    .then((response) => response.blob())
+                    .then((blob) => {
+                        const blobUrl = URL.createObjectURL(blob);
+                        setUploadedImage(blobUrl);
+                    })
+                    .catch((error) => {
+                        console.error('Error fetching Blob URL:', error);
+                    });
+            } else {
+                const image = new Image();
+                image.onload = () => {
+                    setUploadedImage(backgroundImage);
+                };
+                image.src = backgroundImage;
+            }
         }
     }, [backgroundImage]);
-
-
     const containerStyle: React.CSSProperties = {
         ...style,
         backgroundColor,
@@ -37,6 +49,3 @@ const CustomShape: React.FC<ICustomShapeProps> = ({ className, backgroundColor, 
 };
 
 export default CustomShape;
-
-
-

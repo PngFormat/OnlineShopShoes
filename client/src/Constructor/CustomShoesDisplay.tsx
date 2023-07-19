@@ -23,7 +23,10 @@ const CustomShoesDisplay = ({ selectedLaceColor,
     console.log(selectedImageURL)
     return (
         <div>
-            <div className={styles.imageContainer} style={{ marginLeft: 200, position: 'fixed', top: 0, left: 0, zIndex: -1 }}>
+            <div
+                className={styles.imageContainer}
+                style={{ position: 'fixed', top: 0, left: 0, zIndex: -1,backgroundColor:'#85b6ec' }}
+            >
                 <img
                     width={650}
                     height={400}
@@ -39,12 +42,13 @@ const CustomShoesDisplay = ({ selectedLaceColor,
                     width: 970,
                     top: 47,
                     left: 690,
-                    backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : 'не выбрано',
                 }}
-                backgroundColor={selectedImageColor ? selectedImageColor : selectedLaceColor}
+                backgroundColor={selectedImageColor || selectedLaceColor}
+                backgroundImage={selectedImageURL ? `${selectedImageURL}` : 'не выбрано'}
             />
 
-            <CustomShape className={styles.back} backgroundColor={selectedBackColor} />
+            <CustomShape className={styles.back}  backgroundColor={selectedBackColor}
+                         backgroundImage={selectedImageURL ? `${selectedImageURL}` : 'не выбрано'} />
 
             <CustomShape className={styles.bottom} backgroundColor={selectedSoleColor} />
 
@@ -69,9 +73,9 @@ const CustomShoesDisplay = ({ selectedLaceColor,
 
             <CustomShape className={styles.front} backgroundColor={selectedFrontColor} />
 
-            <CustomShape className={styles.piece} backgroundColor={selectedPieceColor} />
+            {/*<CustomShape className={styles.piece} backgroundColor={selectedPieceColor} />*/}
 
-            <CustomShape className={styles.pieceBack} backgroundColor={selectedBackFrontColor} />
+            {/*<CustomShape className={styles.pieceBack} backgroundColor={selectedBackFrontColor} />*/}
 
         </div>
     );

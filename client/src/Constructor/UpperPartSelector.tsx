@@ -83,17 +83,17 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
                 ...prevState,
                 [imageType]: imageURL,
             }));
-            onSelect?.('image', imageType, imageURL); // Pass the selected image to the onSelect prop
+            console.log('selectedImages:', selectedImages);
+            console.log(`selectedImages[${imageType}]:`, selectedImages[imageType]);
+            context.setSelectedImageURL(imageURL);
         } else {
             setSelectedImages((prevState) => ({
                 ...prevState,
-                [imageType]: '',
+                [imageType]: "",
             }));
-            onSelect?.('image', imageType, ''); // Clear the selected image in the onSelect prop
+            context.setSelectedImageURL("");
         }
     };
-
-
 
     const renderCustomShape = (className: string, imageType: string) => (
         <CustomShape
@@ -107,11 +107,11 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
         />
     );
 
-
-
     return (
         <div>
             <h3>Верхня частина</h3>
+            {/*<ImageSlider images={images} onSelectColor={handleColorSelect} />*/}
+            {/* Add more buttons for other upper part options */}
 
             <button onClick={clearSelectedOption}>Очистити</button>
             <h3>Колір шнурків</h3>
