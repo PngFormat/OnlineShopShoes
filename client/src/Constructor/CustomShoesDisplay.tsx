@@ -34,12 +34,14 @@ const CustomShoesDisplay = ({ selectedLaceColor,
             </div>
             <CustomShape
                 className={styles.shape}
-                backgroundImage={selectedImageURL ? `url("${selectedImageURL}")` : undefined}
                 style={{
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center',
+                    height: 500,
+                    width: 970,
+                    top: 47,
+                    left: 690,
+                    backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : 'не выбрано',
                 }}
+                backgroundColor={selectedImageColor ? selectedImageColor : selectedLaceColor}
             />
 
             <CustomShape className={styles.back} backgroundColor={selectedBackColor} />

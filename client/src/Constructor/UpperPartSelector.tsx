@@ -83,15 +83,17 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
                 ...prevState,
                 [imageType]: imageURL,
             }));
-            context.setSelectedImageURL(imageURL); // Set the selected image URL in the context
+            onSelect?.('image', imageType, imageURL); // Pass the selected image to the onSelect prop
         } else {
             setSelectedImages((prevState) => ({
                 ...prevState,
-                [imageType]: "",
+                [imageType]: '',
             }));
-            context.setSelectedImageURL(""); // Clear the selected image URL in the context
+            onSelect?.('image', imageType, ''); // Clear the selected image in the onSelect prop
         }
     };
+
+
 
     const renderCustomShape = (className: string, imageType: string) => (
         <CustomShape
@@ -106,17 +108,10 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
     );
 
 
-    // const images = [
-    //     { src: 'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png', color: '#000000' },
-    //     { src: 'https://images.prom.ua/2895375213_w640_h640_shnurki-dlya-obuvi.jpg', color: '#ffd000' },
-    //     { src: 'https://content2.rozetka.com.ua/goods/images/big/84310538.jpg', color: '#ff0025' }
-    // ];
 
     return (
         <div>
             <h3>Верхня частина</h3>
-            {/*<ImageSlider images={images} onSelectColor={handleColorSelect} />*/}
-            {/* Add more buttons for other upper part options */}
 
             <button onClick={clearSelectedOption}>Очистити</button>
             <h3>Колір шнурків</h3>
