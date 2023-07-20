@@ -119,17 +119,14 @@ const CustomPage = () => {
 
                 <CustomShape
                     className={styles.shape}
-                    style={{
-                        height: 500,
-                        width: 970,
-                        top: 47,
-                        left: 690,
-                        backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : 'не выбрано',
-                    }}
                     backgroundColor={selectedImageColor ? selectedImageColor : selectedLaceColor}
                 />
 
-                <CustomShape className={styles.back} backgroundColor={selectedBackColor} />
+                <CustomShape className={styles.back}
+                             style={{
+                                 backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : 'не выбрано',
+                             }}
+                             backgroundColor={selectedBackColor} />
 
                 <CustomShape className={styles.bottom} backgroundColor={selectedSoleColor} />
 

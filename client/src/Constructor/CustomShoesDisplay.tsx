@@ -19,13 +19,13 @@ const CustomShoesDisplay = ({ selectedLaceColor,
 
 
     const context = useCustomPageContextProvider();
-    const { selectedImageURL } = context;
+    const { selectedImageURL,selectedImageBack, selectedImageFront, selectedImagePiece } = context;
     console.log(selectedImageURL)
     return (
         <div>
             <div
                 className={styles.imageContainer}
-                style={{ position: 'fixed', top: 0, left: 0, zIndex: -1,backgroundColor:'#85b6ec' }}
+                style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }}
             >
                 <img
                     width={650}
@@ -48,9 +48,10 @@ const CustomShoesDisplay = ({ selectedLaceColor,
             />
 
             <CustomShape className={styles.back}  backgroundColor={selectedBackColor}
-                         backgroundImage={selectedImageURL ? `${selectedImageURL}` : 'не выбрано'} />
+                         backgroundImage={selectedImageBack ? `${selectedImageBack}` : 'не выбрано'} />
 
-            <CustomShape className={styles.bottom} backgroundColor={selectedSoleColor} />
+            <CustomShape className={styles.bottom}
+                         backgroundColor={selectedSoleColor} />
 
             <CustomShape
                 className={styles.sole}
@@ -71,11 +72,18 @@ const CustomShoesDisplay = ({ selectedLaceColor,
                 }}
             />
 
-            <CustomShape className={styles.front} backgroundColor={selectedFrontColor} />
+            <CustomShape className={styles.front}
+                         backgroundColor={selectedFrontColor}
+                         backgroundImage={selectedImageFront ? `${selectedImageFront}` : 'не выбрано'} />
 
-            {/*<CustomShape className={styles.piece} backgroundColor={selectedPieceColor} />*/}
 
-            {/*<CustomShape className={styles.pieceBack} backgroundColor={selectedBackFrontColor} />*/}
+            <CustomShape className={styles.piece}
+                         backgroundColor={selectedPieceColor}
+                         backgroundImage={selectedImagePiece ? `${selectedImagePiece}` : 'не выбрано'}
+            />
+
+
+            <CustomShape className={styles.pieceBack} backgroundColor={selectedBackFrontColor} />
 
         </div>
     );

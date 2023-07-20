@@ -33,38 +33,7 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
     });
     const context = useCustomPageContextProvider();
 
-    const handleSelectionImg = (option) => {
-        setSelectedOption(option);
-    };
 
-    const handleSelection = (selectedOption: string) => {
-        if (selectedOption === 'custom') {
-            onUpperPartImageClick?.();
-        } else {
-            const imageUrl = getUpperPartImageSrc(selectedOption);
-            onSelect?.('upperPart', selectedOption, imageUrl);
-        }
-    };
-
-    const getUpperPartImageSrc = (option: string) => {
-        if (option === 'custom') {
-            return selectedImage ? URL.createObjectURL(selectedImage) : '';
-        }
-
-        const upperPartImages: { [key: string]: { src: string; color: string } } = {
-            option1: {
-                src: 'https://www.pngplay.com/wp-content/uploads/3/Shoelaces-PNG-Background.png',
-                color: '#FF0000'
-            },
-            option2: {
-                src: 'https://imgpng.ru/d/shoelaces_PNG28.png',
-                color: '#00FF00'
-            },
-            // Add more options with src and color properties
-        };
-
-        return upperPartImages[option]?.src || '';
-    };
 
     const clearSelectedOption = () => {
         onSelect?.('upperPart', '', '');
@@ -79,21 +48,62 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
 
         if (file) {
             const imageURL = URL.createObjectURL(file);
-            setSelectedImages((prevState) => ({
-                ...prevState,
-                [imageType]: imageURL,
-            }));
-            console.log('selectedImages:', selectedImages);
-            console.log(`selectedImages[${imageType}]:`, selectedImages[imageType]);
-            context.setSelectedImageURL(imageURL);
-        } else {
-            setSelectedImages((prevState) => ({
-                ...prevState,
-                [imageType]: "",
-            }));
-            context.setSelectedImageURL("");
+
+            // Update selected images directly in the context for each part
+            switch (imageType) {
+                case 'laces':
+                     setSelectedImages((prevState) => ({
+                                 ...prevState,
+                                      [imageType]: imageURL,
+                                  }));
+                    context.setSelectedImageURL(imageURL);
+                    break;
+                case 'back':
+                    setSelectedImages((prevState) => ({
+                        ...prevState,
+                        [imageType]: imageURL,
+                    }));
+                    context.setSelectedImageBack(imageURL);
+                    break;
+                case 'front':
+                    setSelectedImages((prevState) => ({
+                        ...prevState,
+                        [imageType]: imageURL,
+                    }));
+
+                    context.setSelectedImageFront(imageURL);
+                    break;
+                case 'piece':
+                    setSelectedImages((prevState) => ({
+                        ...prevState,
+                        [imageType]: imageURL,
+                    }));
+                    context.setSelectedImagePiece(imageURL);
+                    break;
+                default:
+                    break;
+            }
         }
     };
+
+    // const handleImageUpload = (event, imageType) => {
+    //     const file = event.target.files?.[0];
+    //
+    //     if (file) {
+    //         const imageURL = URL.createObjectURL(file);
+    //         setSelectedImages((prevState) => ({
+    //             ...prevState,
+    //             [imageType]: imageURL,
+    //         }));
+    //         context.setSelectedImageURL(imageURL);
+    //     } else {
+    //         setSelectedImages((prevState) => ({
+    //             ...prevState,
+    //             [imageType]: "",
+    //         }));
+    //         context.setSelectedImageURL("");
+    //     }
+    // };
 
     const renderCustomShape = (className: string, imageType: string) => (
         <CustomShape
@@ -175,3 +185,4 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
 };
 
 export default UpperPartSelector;
+

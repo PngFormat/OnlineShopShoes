@@ -27,6 +27,9 @@ const ContextProviderCustom: React.FC = ({ children }) => {
     const [selectedSoleBottomColor, setSelectedSoleBottomColor] = useState("");
     const [selectedSoleColor, setSelectedSoleColor] = useState("");
     const [selectedImage, setSelectedImage] = useState("");
+    const [selectedImageBack, setSelectedImageBack] = useState("");
+    const [selectedImageFront, setSelectedImageFront] = useState("");
+    const [selectedImagePiece, setSelectedImagePiece] = useState("");
 
     const value = {
         selectedBackColor,
@@ -40,6 +43,9 @@ const ContextProviderCustom: React.FC = ({ children }) => {
         selectedSoleBottomColor,
         selectedSoleColor,
         selectedImage,
+        selectedImageBack,
+        selectedImageFront,
+        selectedImagePiece,
         setSelectedBackColor,
         setSelectedBackFrontColor,
         setSelectedFrontColor,
@@ -50,7 +56,10 @@ const ContextProviderCustom: React.FC = ({ children }) => {
         setSelectedSideBottomColor,
         setSelectedSoleBottomColor,
         setSelectedSoleColor,
-        setSelectedImage
+        setSelectedImage,
+        setSelectedImageBack,
+        setSelectedImageFront,
+        setSelectedImagePiece
     };
     console.log(selectedImageURL)
     return (
