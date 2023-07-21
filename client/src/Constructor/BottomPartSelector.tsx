@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import styles from "../style/CustomShoes.module.scss";
 import CustomShape from "./Components/CustomShape";
+import {useCustomPageContextProvider} from "../Context/CustomPageContext";
 
 interface IBottomPartSelectorProps {
     onSelect?: (partType: string, selectedOption: string, imageUrl: string) => void;
@@ -17,15 +18,16 @@ const BottomPartSelector: React.FC<IBottomPartSelectorProps> = ({
                                                                     onSoleBottomColorSelect,
                                                                     onSideColorSelect,
                                                                     onBackFrontColorSelect,
-                                                                    onImageURLSelect
+
                                                                 }) => {
     const fileInputRefs = useRef<HTMLInputElement[]>([]);
     const [selectedImages, setSelectedImages] = useState({
-        back: '',
+        backBottom: '',
         sole: '',
         side: '',
         bottom: ''
     });
+    const context = useCustomPageContextProvider();
 
 
     const handleImageUpload = (event, imageType) => {
@@ -33,15 +35,41 @@ const BottomPartSelector: React.FC<IBottomPartSelectorProps> = ({
 
         if (file) {
             const imageURL = URL.createObjectURL(file);
-            setSelectedImages(prevState => ({
-                ...prevState,
-                [imageType]: imageURL
-            }));
-        } else {
-            setSelectedImages(prevState => ({
-                ...prevState,
-                [imageType]: ''
-            }));
+
+            // Update selected images directly in the context for each part
+            switch (imageType) {
+                case 'backBottom':
+                    setSelectedImages((prevState) => ({
+                        ...prevState,
+                        [imageType]: imageURL,
+                    }));
+                    context.setSelectedImageBackSide(imageURL);
+                    break;
+                case 'sole':
+                    setSelectedImages((prevState) => ({
+                        ...prevState,
+                        [imageType]: imageURL,
+                    }));
+                    context.setSelectedImageSole(imageURL);
+                    break;
+                case 'side':
+                    setSelectedImages((prevState) => ({
+                        ...prevState,
+                        [imageType]: imageURL,
+                    }));
+
+                    context.setSelectedImageSide(imageURL);
+                    break;
+                case 'bottom':
+                    setSelectedImages((prevState) => ({
+                        ...prevState,
+                        [imageType]: imageURL,
+                    }));
+                    context.setSelectedImageBottom(imageURL);
+                    break;
+                default:
+                    break;
+            }
         }
     };
 
@@ -107,8 +135,8 @@ const BottomPartSelector: React.FC<IBottomPartSelectorProps> = ({
             <input
                 type="file"
                 accept="image/*"
-                name="sideBottom"
-                onChange={(event) => handleImageUpload(event, 'sideBottom')}
+                name="side"
+                onChange={(event) => handleImageUpload(event, 'side')}
                 ref={(ref) => (fileInputRefs.current[2] = ref)}
             />
 
@@ -121,14 +149,14 @@ const BottomPartSelector: React.FC<IBottomPartSelectorProps> = ({
             <input
                 type="file"
                 accept="image/*"
-                name="back"
-                onChange={(event) => handleImageUpload(event, 'back')}
+                name="backBottom"
+                onChange={(event) => handleImageUpload(event, 'backBottom')}
                 ref={(ref) => (fileInputRefs.current[3] = ref)}
             />
 
-            {renderCustomShape(styles.pieceBack, 'back')}
+            {renderCustomShape(styles.pieceBack, 'backBottom')}
             {renderCustomShape(styles.bottom, 'bottom')}
-            {renderCustomShape(styles.sideBottom, 'sideBottom')}
+            {renderCustomShape(styles.sideBottom, 'side')}
             {renderCustomShape(styles.sole, 'sole')}
         </div>
     );

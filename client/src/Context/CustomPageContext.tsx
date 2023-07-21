@@ -31,6 +31,11 @@ const ContextProviderCustom: React.FC = ({ children }) => {
     const [selectedImageFront, setSelectedImageFront] = useState("");
     const [selectedImagePiece, setSelectedImagePiece] = useState("");
 
+    const [selectedImageBackSide, setSelectedImageBackSide] = useState("");
+    const [selectedImageSole, setSelectedImageSole] = useState("");
+    const [selectedImageSide, setSelectedImageSide] = useState("");
+    const [selectedImageBottom, setSelectedImageBottom] = useState("");
+
     const value = {
         selectedBackColor,
         selectedBackFrontColor,
@@ -46,6 +51,10 @@ const ContextProviderCustom: React.FC = ({ children }) => {
         selectedImageBack,
         selectedImageFront,
         selectedImagePiece,
+        selectedImageBackSide,
+        selectedImageSole,
+        selectedImageSide,
+        selectedImageBottom,
         setSelectedBackColor,
         setSelectedBackFrontColor,
         setSelectedFrontColor,
@@ -59,9 +68,12 @@ const ContextProviderCustom: React.FC = ({ children }) => {
         setSelectedImage,
         setSelectedImageBack,
         setSelectedImageFront,
-        setSelectedImagePiece
+        setSelectedImagePiece,
+        setSelectedImageBackSide,
+        setSelectedImageSole,
+        setSelectedImageSide,
+        setSelectedImageBottom,
     };
-    console.log(selectedImageURL)
     return (
         <CustomPageContext.Provider value={value}>
             {children}

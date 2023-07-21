@@ -19,7 +19,7 @@ const CustomPage = () => {
         selectedBackColor, setSelectedBackColor,
         selectedFrontColor, setSelectedFrontColor,
         selectedPieceColor, setSelectedPieceColor,
-        selectedBackFrontColor, setBackFrontColor,
+        selectedBackFrontColor, setSelectedBackFrontColor,
         selectedImageColor, setSelectedImageColor,
         selectedImageURL, setSelectedImageURL} = useCustomPageContextProvider();
 
@@ -81,7 +81,7 @@ const CustomPage = () => {
     };
 
     const handleBackFrontColorSelect = (colorPiece) => {
-        setBackFrontColor(colorPiece);
+        setSelectedBackFrontColor(colorPiece);
     };
 
     const handleColorSelect = (color: string, selectHandler: (color: string) => void) => {
@@ -143,16 +143,33 @@ const CustomPage = () => {
                     className={styles.sideBottom}
                     backgroundColor={selectedSideBottomColor}
                     style={{
-                        backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : '',
+                        backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : '', /*// Колір боків*/
                         backgroundSize: 'cover',
                     }}
+
                 />
 
-                <CustomShape className={styles.front} backgroundColor={selectedFrontColor} />
+                <CustomShape className={styles.front}
+                             style={{
+                                 backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : '',
+                                 backgroundSize: 'cover',
+                             }}
+                              backgroundColor={selectedFrontColor} />
 
-                <CustomShape className={styles.piece} backgroundColor={selectedPieceColor} />
 
-                <CustomShape className={styles.pieceBack} backgroundColor={selectedBackFrontColor} />
+                <CustomShape className={styles.piece}
+                             style={{
+                                 backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : '',
+                                 backgroundSize: 'cover',
+                             }}
+                             backgroundColor={selectedPieceColor} />
+
+                <CustomShape className={styles.pieceBack}
+                             style={{
+                                 backgroundImage: selectedImageURL ? `url("${selectedImageURL}")` : '',
+                                 backgroundSize: 'cover',
+                             }}
+                             backgroundColor={selectedBackFrontColor} />
 
                 <div className={styles.mainBlock}>
                     <Button onClick={() => history.push(AuthorisedPath.DONECUSTOM_ROUTE)} variant={'dark'}>Виконати</Button>

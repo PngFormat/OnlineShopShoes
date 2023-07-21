@@ -86,24 +86,6 @@ const UpperPartSelector: React.FC<IUpperPartSelectorProps> = ({
         }
     };
 
-    // const handleImageUpload = (event, imageType) => {
-    //     const file = event.target.files?.[0];
-    //
-    //     if (file) {
-    //         const imageURL = URL.createObjectURL(file);
-    //         setSelectedImages((prevState) => ({
-    //             ...prevState,
-    //             [imageType]: imageURL,
-    //         }));
-    //         context.setSelectedImageURL(imageURL);
-    //     } else {
-    //         setSelectedImages((prevState) => ({
-    //             ...prevState,
-    //             [imageType]: "",
-    //         }));
-    //         context.setSelectedImageURL("");
-    //     }
-    // };
 
     const renderCustomShape = (className: string, imageType: string) => (
         <CustomShape
